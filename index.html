@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Baggle — Coming Soon</title>
+<meta name="description" content="Baggle is coming soon. Get notified when we launch.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M13 12 v-2 a7 7 0 0 1 14 0 v2' fill='none' stroke='%2333224B' stroke-width='3' stroke-linecap='round'/%3E%3Crect x='5.5' y='12' width='29' height='24.5' rx='7' fill='%23FF5C8A' stroke='%2333224B' stroke-width='3'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --purple:#3D2A5C;
+    --purple-dark:#2C1D44;
+    --gold:#E8B75A;
+    --ink:#2B2B2B;
+    --cream:#F6F3ED;
+    --muted:#8a7f74;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;height:100%;}
+  body{
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    background-color:#FDFBF8;
+  }
+  .wrap{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:64px 24px 40px;
+  }
+  .logo{
+    width:clamp(220px, 26vw, 340px);
+    height:auto;
+    margin-bottom:34px;
+    filter:drop-shadow(0 4px 10px rgba(43,43,43,0.10));
+  }
+  h1{
+    font-family:"Poppins",sans-serif;
+    font-weight:800;
+    font-size:clamp(1.5rem,4.6vw,3.1rem);
+    line-height:1.16;
+    letter-spacing:-0.01em;
+    margin:0 0 22px;
+    max-width:900px;
+  }
+  h1 .accent{
+    color:var(--purple);
+  }
+  p.sub{
+    font-size:clamp(1rem,2vw,1.15rem);
+    line-height:1.65;
+    color:#6b6259;
+    max-width:640px;
+    margin:0 0 36px;
+  }
+  form{
+    display:flex;
+    gap:10px;
+    width:100%;
+    max-width:420px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  input[type="email"]{
+    flex:1 1 240px;
+    min-width:0;
+    padding:15px 20px;
+    border-radius:999px;
+    border:1.5px solid #e4dcd0;
+    background:#fff;
+    font-family:"Inter",sans-serif;
+    font-size:0.95rem;
+    color:var(--ink);
+    outline:none;
+  }
+  input[type="email"]:focus{
+    border-color:var(--purple);
+  }
+  input[type="email"]::placeholder{
+    color:#b3a89a;
+  }
+  button{
+    flex:0 0 auto;
+    padding:15px 28px;
+    border-radius:999px;
+    border:none;
+    background:var(--purple);
+    color:#fff;
+    font-family:"Inter",sans-serif;
+    font-weight:600;
+    font-size:0.95rem;
+    cursor:pointer;
+    transition:background 0.15s ease, transform 0.15s ease;
+  }
+  button:hover{
+    background:var(--purple-dark);
+    transform:translateY(-1px);
+  }
+  .status{
+    margin-top:16px;
+    font-size:0.88rem;
+    color:var(--muted);
+    min-height:1.2em;
+  }
+  footer{
+    padding:26px 20px 34px;
+    text-align:center;
+  }
+  .copyright{
+    margin-top:22px;
+    font-size:0.76rem;
+    color:#b3a89a;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <img class="logo" src="logo.png" alt="Baggle">
+    <h1>See it. Want it. <span class="accent">Bag it.</span></h1>
+    <p class="sub">One place to save everything you love, from any store. Get notified when prices fall and your favourite item is back in stock. Be the first to know when we launch.</p>
+    <form id="waitlist-form">
+      <input type="email" id="email" placeholder="Email address" required>
+      <button type="submit">Join the waitlist</button>
+    </form>
+    <div class="status" id="status"></div>
+  </div>
+  <footer>
+    <div class="copyright">&copy; 2026 Baggle · baggle.net</div>
+  </footer>
+  <script>
+    document.getElementById('waitlist-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      document.getElementById('status').textContent = "Thanks — we'll let you know when we launch.";
+      this.reset();
+    });
+  </script>
+</body>
+</html>
