@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Bags — Baggle</title>
+<meta name="description" content="Your Baggle dashboard — every item you've saved, organised into bags.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='6' fill='%23111111'/%3E%3Ctext x='20' y='27' font-family='Georgia, serif' font-size='20' fill='%23F7F4EF' text-anchor='middle'%3Eb%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="dashboard.min.css">
+</head>
+<body>
+
+<!-- ============ AUTH SCREEN ============ -->
+<section class="auth-screen" id="view-auth">
+  <div class="auth-box">
+    <svg class="auth-logo" viewBox="0 0 30 27" fill="none">
+      <rect x="0" y="4" width="22" height="20" rx="5.2" fill="#FF5C8A" stroke="#3D2A5C" stroke-width="1.4"/>
+      <path d="M6.3 4 v-2.2 a4.8 4.8 0 0 1 9.6 0 v2.2" fill="none" stroke="#3D2A5C" stroke-width="1.5"/>
+    </svg>
+    <p class="auth-tagline">Sign in to see everything you've bagged, on any device.</p>
+    <label class="field-label">Email</label>
+    <input id="authEmail" class="field-input" type="email" placeholder="you@example.com" autocomplete="email">
+    <label class="field-label">Password</label>
+    <input id="authPassword" class="field-input" type="password" placeholder="At least 6 characters" autocomplete="current-password">
+    <p class="auth-error" id="authError"></p>
+    <p class="auth-notice" id="authNotice"></p>
+    <button id="authSubmitBtn" class="btn-pill solid full">Log in</button>
+    <p class="auth-switch">
+      <span id="authSwitchText">Don't have an account yet?</span>
+      <button id="authSwitchBtn" class="link-btn">Sign up</button>
+    </p>
+  </div>
+</section>
+
+<!-- ============ DASHBOARD (shown once signed in) ============ -->
+<div class="app" id="dashShell" hidden>
+
+  <aside class="sidebar">
+    <svg class="logo" viewBox="0 0 30 27" fill="none">
+      <rect x="0" y="4" width="22" height="20" rx="5.2" fill="#FF5C8A" stroke="#3D2A5C" stroke-width="1.4"/>
+      <path d="M6.3 4 v-2.2 a4.8 4.8 0 0 1 9.6 0 v2.2" fill="none" stroke="#3D2A5C" stroke-width="1.5"/>
+    </svg>
+    <nav>
+      <button class="side-btn active" data-nav="home" title="Home">
+        <svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1H10v-5.5h4V20h3.5a1 1 0 0 0 1-1v-9"/></svg>
+        Home
+      </button>
+      <button class="side-btn" id="sidebarCreateBagBtn" title="Create a new bag">
+        <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        New bag
+      </button>
+      <button class="side-btn" data-nav="notifications" title="Alerts">
+        <svg viewBox="0 0 24 24"><path d="M6 10.5a6 6 0 0 1 12 0c0 4 1.5 5.3 1.5 5.3H4.5S6 14.5 6 10.5Z"/><path d="M10 19a2.2 2.2 0 0 0 4 0"/></svg>
+        Alerts
+      </button>
+    </nav>
+    <div class="spacer"></div>
+    <div class="side-bottom">
+      <button class="side-btn" id="logoutBtn" title="Log out">
+        <svg viewBox="0 0 24 24"><path d="M9 4H6a1.5 1.5 0 0 0-1.5 1.5v13A1.5 1.5 0 0 0 6 20h3"/><path d="M14 16.5 19 12l-5-4.5"/><path d="M19 12H9"/></svg>
+        Log out
+      </button>
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- ---- HOME VIEW: all bags ---- -->
+    <section class="view active" id="view-home">
+      <div class="dash-header">
+        <div class="dash-title-row">
+          <h1 class="dash-title">My Bags</h1>
+          <span class="item-count-pill" id="totalCountPill">0 items saved</span>
+        </div>
+        <div class="dash-actions">
+          <div class="avatar" id="avatarChip">—</div>
+        </div>
+      </div>
+
+      <div class="bags-grid" id="bagsGrid">
+        <!-- bag cards rendered by dashboard.js -->
+      </div>
+    </section>
+
+    <!-- ---- BAG DETAIL VIEW ---- -->
+    <section class="view" id="view-bag">
+      <div class="dash-header">
+        <div class="dash-title-row">
+          <button class="back-btn show" id="backBtn">
+            <svg viewBox="0 0 24 24"><path d="M15 5 8 12l7 7"/></svg>
+            All bags
+          </button>
+          <h1 class="dash-title" id="bagTitle">—</h1>
+          <span class="item-count-pill" id="bagCountPill">0 items</span>
+        </div>
+        <div class="dash-actions">
+          <button class="btn-pill danger-outline" id="deleteBagBtn">Delete bag</button>
+        </div>
+      </div>
+
+      <div class="items-grid" id="itemsGrid">
+        <!-- item cards rendered by dashboard.js -->
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ============ create-bag modal ============ -->
+<div class="modal-backdrop" id="modalBackdrop" hidden>
+  <div class="modal">
+    <h3>Name your bag</h3>
+    <input id="newBagNameInput" class="field-input" type="text" placeholder="e.g. Summer Holiday" maxlength="60">
+    <p class="modal-error" id="modalError"></p>
+    <div class="modal-actions">
+      <button class="btn-pill" id="modalCancelBtn">Cancel</button>
+      <button class="btn-pill solid" id="modalCreateBtn">Create</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="supabase.vendor.js"></script>
+<script src="dashboard.bundle.min.js"></script>
+</body>
+</html>
