@@ -245,12 +245,13 @@
     margin:0 auto 34px;
   }
   .signup-form{
-    display:flex;gap:10px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
     max-width:420px;margin:0 auto;
-    flex-wrap:wrap;justify-content:center;
   }
-  .signup-form input[type="email"]{
-    flex:1 1 240px;min-width:0;
+  .signup-form input{
+    width:100%;
     padding:14px 18px;
     border:1.5px solid var(--line);
     border-radius:3px;
@@ -259,13 +260,20 @@
     background:var(--white);
     outline:none;
   }
-  .signup-form input[type="email"]:focus{border-color:var(--black);}
-  .signup-form button{border-radius:3px;}
+  .signup-form input:focus{border-color:var(--black);}
+  .signup-form input.full{grid-column:1 / -1;}
+  .signup-form button{border-radius:3px;grid-column:1 / -1;margin-top:4px;}
   .signup-status{
     margin-top:14px;
     font-size:0.86rem;
     color:var(--stone);
     min-height:1.2em;
+  }
+  .signup-status.error{color:#C14343;}
+  .signup-foot{
+    margin-top:18px;
+    font-size:0.86rem;
+    color:var(--stone);
   }
 
   /* ---------- footer ---------- */
@@ -439,13 +447,17 @@
 
   <section class="signup" id="signup">
     <div class="wrap">
-      <h2 style="margin-left:auto;margin-right:auto;">Be the first to know when we launch.</h2>
-      <p>Sign up and we'll let you know the moment Baggle is ready.</p>
-      <form class="signup-form" id="waitlist-form">
-        <input type="email" id="email" placeholder="Email address" required>
-        <button type="submit" class="btn btn-solid">Sign up</button>
+      <h2 style="margin-left:auto;margin-right:auto;">Create your free Baggle account.</h2>
+      <p>Save items from any store, get price-drop and back-in-stock alerts, and pick up right where you left off on any device.</p>
+      <form class="signup-form" id="signup-form">
+        <input type="text" id="signupFirstName" placeholder="First name" autocomplete="given-name" required>
+        <input type="text" id="signupLastName" placeholder="Last name" autocomplete="family-name" required>
+        <input type="email" id="signupEmail" class="full" placeholder="Email address" autocomplete="email" required>
+        <input type="password" id="signupPassword" class="full" placeholder="Password (at least 6 characters)" autocomplete="new-password" minlength="6" required>
+        <button type="submit" class="btn btn-solid" id="signupSubmitBtn">Sign up</button>
       </form>
-      <div class="signup-status" id="status"></div>
+      <div class="signup-status" id="signup-status"></div>
+      <p class="signup-foot">Already have an account? <a href="/dashboard/" class="link-btn">Log in</a></p>
     </div>
   </section>
 
@@ -469,11 +481,79 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    document.getElementById('waitlist-form').addEventListener('submit', function(e){
+    // Same Supabase project as the extension/dashboard (shared/supabase-config.js
+    // in the Bagged repo) — this is the public "anon"/"publishable" key, safe to
+    // ship in a plain static page because Row Level Security is what actually
+    // protects people's data, not keeping this key secret.
+    const baggleSupabase = supabase.createClient(
+      "https://wndqubtncxtbninmojpx.supabase.co",
+      "sb_publishable_vfYfD-LtUoJEbjkvhEdckg_PbAEr-PJ"
+    );
+
+    const signupForm = document.getElementById('signup-form');
+    const signupStatus = document.getElementById('signup-status');
+    const signupSubmitBtn = document.getElementById('signupSubmitBtn');
+
+    signupForm.addEventListener('submit', async function(e){
       e.preventDefault();
-      document.getElementById('status').textContent = "Thanks, we'll let you know when we launch.";
-      this.reset();
+      const firstName = document.getElementById('signupFirstName').value.trim();
+      const lastName = document.getElementById('signupLastName').value.trim();
+      const email = document.getElementById('signupEmail').value.trim();
+      const password = document.getElementById('signupPassword').value;
+
+      signupStatus.classList.remove('error');
+      signupStatus.textContent = '';
+
+      if (!firstName || !lastName) {
+        signupStatus.classList.add('error');
+        signupStatus.textContent = 'Enter your first and last name.';
+        return;
+      }
+      if (password.length < 6) {
+        signupStatus.classList.add('error');
+        signupStatus.textContent = 'Password must be at least 6 characters.';
+        return;
+      }
+
+      signupSubmitBtn.disabled = true;
+      const originalLabel = signupSubmitBtn.textContent;
+      signupSubmitBtn.textContent = 'Signing up…';
+
+      try {
+        const { data, error } = await baggleSupabase.auth.signUp({
+          email,
+          password,
+          options: {
+            data: {
+              first_name: firstName,
+              last_name: lastName,
+              full_name: `${firstName} ${lastName}`
+            },
+            emailRedirectTo: "https://baggle.net/dashboard/"
+          }
+        });
+        if (error) {
+          signupStatus.classList.add('error');
+          signupStatus.textContent = error.message;
+          return;
+        }
+        if (data.session) {
+          // Email confirmation happens to be off — go straight to the dashboard.
+          window.location.href = '/dashboard/';
+          return;
+        }
+        signupForm.reset();
+        signupStatus.textContent = "Check your email to confirm your account, then log in.";
+      } catch (err) {
+        console.error(err);
+        signupStatus.classList.add('error');
+        signupStatus.textContent = "Something went wrong — check your connection and try again.";
+      } finally {
+        signupSubmitBtn.disabled = false;
+        signupSubmitBtn.textContent = originalLabel;
+      }
     });
   </script>
 </body>
