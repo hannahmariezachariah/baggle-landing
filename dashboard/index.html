@@ -128,6 +128,7 @@
             <input type="checkbox" id="bagPrivateCheckbox">
             <span>Private</span>
           </label>
+          <button class="btn-pill" id="engagementBtn">Followers &amp; likes</button>
           <button class="btn-pill" id="shareBagBtn">Share</button>
         </div>
       </div>
@@ -275,6 +276,25 @@
     <div class="share-privacy-note" id="sharePrivacyNote" hidden></div>
     <div class="modal-actions">
       <button class="btn-pill full" id="shareCloseBtn">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ followers & likes modal (owner-only) ============ -->
+<div class="modal-backdrop" id="engagementBackdrop" hidden>
+  <div class="modal">
+    <h3>Followers &amp; likes</h3>
+    <p class="modal-hint">Only you can see this — it's not shown to anyone else, even if their own account is private.</p>
+    <div class="engagement-section">
+      <h4 class="engagement-heading">Following <span id="engagementFollowCount">0</span></h4>
+      <div class="engagement-list" id="engagementFollowList"></div>
+    </div>
+    <div class="engagement-section">
+      <h4 class="engagement-heading">Likes <span id="engagementLikeCount">0</span></h4>
+      <div class="engagement-list" id="engagementLikeList"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-pill full" id="engagementCloseBtn">Done</button>
     </div>
   </div>
 </div>
