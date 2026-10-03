@@ -21,6 +21,12 @@
       <path d="M6.3 4 v-2.2 a4.8 4.8 0 0 1 9.6 0 v2.2" fill="none" stroke="#3D2A5C" stroke-width="1.5"/>
     </svg>
     <p class="auth-tagline">Sign in to see everything you've bagged, on any device.</p>
+    <div id="fullNameRow" hidden>
+      <label class="field-label">First name</label>
+      <input id="authFirstName" class="field-input" type="text" placeholder="Jane" autocomplete="given-name">
+      <label class="field-label">Last name</label>
+      <input id="authLastName" class="field-input" type="text" placeholder="Smith" autocomplete="family-name">
+    </div>
     <label class="field-label">Email</label>
     <input id="authEmail" class="field-input" type="email" placeholder="you@example.com" autocomplete="email">
     <label class="field-label">Password</label>
@@ -62,10 +68,19 @@
     </nav>
     <div class="spacer"></div>
     <div class="side-bottom">
-      <button class="side-btn" id="logoutBtn" title="Log out">
-        <svg viewBox="0 0 24 24"><path d="M9 4H6a1.5 1.5 0 0 0-1.5 1.5v13A1.5 1.5 0 0 0 6 20h3"/><path d="M14 16.5 19 12l-5-4.5"/><path d="M19 12H9"/></svg>
-        Log out
-      </button>
+      <div class="account-menu" id="accountMenu">
+        <div class="account-dropdown" id="accountDropdown" hidden>
+          <button class="account-dropdown-item" id="logoutBtn">
+            <svg viewBox="0 0 24 24"><path d="M9 4H6a1.5 1.5 0 0 0-1.5 1.5v13A1.5 1.5 0 0 0 6 20h3"/><path d="M14 16.5 19 12l-5-4.5"/><path d="M19 12H9"/></svg>
+            Log out
+          </button>
+          <button class="account-dropdown-item danger" id="deleteAccountBtn">
+            <svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4.5A1.5 1.5 0 0 1 10.5 3h3A1.5 1.5 0 0 1 15 4.5V7m2 0v12.5A1.5 1.5 0 0 1 15.5 21h-7A1.5 1.5 0 0 1 7 19.5V7"/></svg>
+            Delete account
+          </button>
+        </div>
+        <button class="avatar" id="avatarChip" title="Account" aria-haspopup="true" aria-expanded="false">—</button>
+      </div>
     </div>
   </aside>
 
@@ -77,9 +92,6 @@
         <div class="dash-title-row">
           <h1 class="dash-title">My Bags</h1>
           <span class="item-count-pill" id="totalCountPill">0 items saved</span>
-        </div>
-        <div class="dash-actions">
-          <div class="avatar" id="avatarChip">—</div>
         </div>
       </div>
 
@@ -106,6 +118,20 @@
 
       <div class="items-grid" id="itemsGrid">
         <!-- item cards rendered by dashboard.js -->
+      </div>
+    </section>
+
+    <!-- ---- ALERTS VIEW ---- -->
+    <section class="view" id="view-alerts">
+      <div class="dash-header">
+        <div class="dash-title-row">
+          <h1 class="dash-title">Alerts</h1>
+          <span class="item-count-pill" id="alertsCountPill">0 alerts</span>
+        </div>
+      </div>
+
+      <div class="alerts-list" id="alertsList">
+        <!-- alert rows rendered by dashboard.js -->
       </div>
     </section>
 
