@@ -65,6 +65,10 @@
         <svg viewBox="0 0 24 24"><path d="M6 10.5a6 6 0 0 1 12 0c0 4 1.5 5.3 1.5 5.3H4.5S6 14.5 6 10.5Z"/><path d="M10 19a2.2 2.2 0 0 0 4 0"/></svg>
         Alerts
       </button>
+      <button class="side-btn" data-nav="following" title="Following">
+        <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.35-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 5c-2.5 4.65-9.5 9-9.5 9Z"/></svg>
+        Following
+      </button>
     </nav>
     <div class="spacer"></div>
   </aside>
@@ -116,6 +120,11 @@
           <span class="item-count-pill" id="bagCountPill">0 items</span>
         </div>
         <div class="dash-actions">
+          <label class="checkbox-row bag-private-toggle" id="bagPrivateRow" hidden>
+            <input type="checkbox" id="bagPrivateCheckbox">
+            <span>Private</span>
+          </label>
+          <button class="btn-pill" id="shareBagBtn">Share</button>
           <button class="btn-pill danger-outline" id="deleteBagBtn">Delete bag</button>
         </div>
       </div>
@@ -136,6 +145,43 @@
 
       <div class="alerts-list" id="alertsList">
         <!-- alert rows rendered by dashboard.js -->
+      </div>
+    </section>
+
+    <!-- ---- FOLLOWING VIEW: bags other people have shared ---- -->
+    <section class="view" id="view-following">
+      <div class="dash-header">
+        <div class="dash-title-row">
+          <h1 class="dash-title">Following</h1>
+          <span class="item-count-pill" id="followingCountPill">0 bags</span>
+        </div>
+      </div>
+
+      <div class="bags-grid" id="followingGrid">
+        <!-- followed bag cards rendered by dashboard.js -->
+      </div>
+    </section>
+
+    <!-- ---- SHARED BAG VIEW (read-only, opened via a share link) ---- -->
+    <section class="view" id="view-shared">
+      <div class="dash-header">
+        <div class="dash-title-row">
+          <button class="back-btn show" id="sharedBackBtn">
+            <svg viewBox="0 0 24 24"><path d="M15 5 8 12l7 7"/></svg>
+            All bags
+          </button>
+          <h1 class="dash-title" id="sharedBagTitle">—</h1>
+          <span class="item-count-pill" id="sharedCountPill">0 items</span>
+        </div>
+        <div class="dash-actions">
+          <span class="shared-by-label" id="sharedByLabel"></span>
+          <button class="btn-pill solid" id="followToggleBtn" hidden>Follow</button>
+        </div>
+      </div>
+
+      <div class="empty-items" id="sharedUnavailable" hidden></div>
+      <div class="items-grid" id="sharedItemsGrid">
+        <!-- read-only item cards rendered by dashboard.js -->
       </div>
     </section>
 
@@ -163,6 +209,13 @@
     <input id="editFirstNameInput" class="field-input" type="text" placeholder="Jane" maxlength="60" autocomplete="given-name">
     <label class="field-label">Last name</label>
     <input id="editLastNameInput" class="field-input" type="text" placeholder="Smith" maxlength="60" autocomplete="family-name">
+    <div class="profile-public-row">
+      <label class="checkbox-row">
+        <input type="checkbox" id="publicAccountCheckbox">
+        <span>Public account — let other Baggle users find and follow your bags</span>
+      </label>
+      <p class="field-hint">You can still mark individual bags private even with a public account.</p>
+    </div>
     <p class="modal-error" id="editProfileError"></p>
     <div class="modal-actions">
       <button class="btn-pill" id="editProfileCancelBtn">Cancel</button>
@@ -181,6 +234,22 @@
     <p class="modal-error" id="moveItemError"></p>
     <div class="modal-actions">
       <button class="btn-pill full" id="moveItemCancelBtn">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ share modal ============ -->
+<div class="modal-backdrop" id="shareBackdrop" hidden>
+  <div class="modal">
+    <h3>Share this bag</h3>
+    <p class="modal-hint">Anyone with a Baggle account can open this link and follow along.</p>
+    <div class="share-link-row">
+      <input id="shareLinkInput" class="field-input" type="text" readonly>
+      <button class="btn-pill solid" id="shareCopyBtn">Copy</button>
+    </div>
+    <div class="share-privacy-note" id="sharePrivacyNote" hidden></div>
+    <div class="modal-actions">
+      <button class="btn-pill full" id="shareCloseBtn">Done</button>
     </div>
   </div>
 </div>
