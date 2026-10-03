@@ -69,6 +69,10 @@
         <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.35-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 5c-2.5 4.65-9.5 9-9.5 9Z"/></svg>
         Following
       </button>
+      <button class="side-btn" data-nav="foryou" title="For You">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        For You
+      </button>
     </nav>
     <div class="spacer"></div>
   </aside>
@@ -161,6 +165,24 @@
       </div>
     </section>
 
+    <!-- ---- FOR YOU VIEW: search & discover public bags ---- -->
+    <section class="view" id="view-foryou">
+      <div class="dash-header">
+        <div class="dash-title-row">
+          <h1 class="dash-title">For You</h1>
+          <span class="item-count-pill" id="forYouCountPill">0 bags</span>
+        </div>
+      </div>
+
+      <div class="search-row">
+        <input id="forYouSearchInput" class="field-input" type="text" placeholder="Search bags or people…">
+      </div>
+
+      <div class="bags-grid" id="forYouGrid">
+        <!-- public bag cards rendered by dashboard.js -->
+      </div>
+    </section>
+
     <!-- ---- SHARED BAG VIEW (read-only, opened via a share link) ---- -->
     <section class="view" id="view-shared">
       <div class="dash-header">
@@ -174,6 +196,10 @@
         </div>
         <div class="dash-actions">
           <span class="shared-by-label" id="sharedByLabel"></span>
+          <button class="like-btn" id="sharedLikeBtn" hidden title="Like" aria-label="Like">
+            <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.35-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 5c-2.5 4.65-9.5 9-9.5 9Z"/></svg>
+            <span class="like-count">0</span>
+          </button>
           <button class="btn-pill solid" id="followToggleBtn" hidden>Follow</button>
         </div>
       </div>
