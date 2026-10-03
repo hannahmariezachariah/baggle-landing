@@ -171,6 +171,20 @@
   </div>
 </div>
 
+<!-- ============ move-item modal ============ -->
+<div class="modal-backdrop" id="moveItemBackdrop" hidden>
+  <div class="modal">
+    <h3>Move to…</h3>
+    <div class="bag-picker-list" id="bagPickerList">
+      <!-- other bags rendered by dashboard.js -->
+    </div>
+    <p class="modal-error" id="moveItemError"></p>
+    <div class="modal-actions">
+      <button class="btn-pill full" id="moveItemCancelBtn">Cancel</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script src="supabase.vendor.js"></script>
