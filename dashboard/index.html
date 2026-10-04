@@ -230,7 +230,7 @@
   <div class="modal">
     <h3>Edit profile</h3>
     <div class="avatar-edit-row">
-      <div class="avatar avatar-preview" id="avatarPreview" aria-hidden="true">—</div>
+      <div class="avatar avatar-preview" id="avatarPreview" role="img" aria-label="Your profile picture. If you have a photo, press to enlarge it." title="Click to enlarge">—</div>
       <div class="avatar-edit-actions">
         <button type="button" class="btn-pill" id="avatarChangeBtn">Change photo</button>
         <button type="button" class="avatar-remove" id="avatarRemoveBtn" hidden>Remove photo</button>
@@ -254,6 +254,29 @@
       <button class="btn-pill solid" id="editProfileSaveBtn">Save</button>
     </div>
   </div>
+</div>
+
+<!-- ============ adjust-photo modal ============ -->
+<div class="modal-backdrop" id="cropBackdrop" hidden>
+  <div class="modal crop-modal">
+    <h3>Adjust your photo</h3>
+    <p class="modal-hint">Drag to move it, and use the slider to zoom. What's inside the circle is your picture.</p>
+    <div class="crop-stage" id="cropStage">
+      <img id="cropImg" alt="" draggable="false">
+      <div class="crop-ring"></div>
+    </div>
+    <input type="range" class="crop-zoom" id="cropZoom" min="1" max="4" step="0.01" value="1" aria-label="Zoom">
+    <p class="modal-error" id="cropError"></p>
+    <div class="modal-actions">
+      <button class="btn-pill" id="cropCancelBtn">Cancel</button>
+      <button class="btn-pill solid" id="cropSaveBtn">Use photo</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ enlarged profile picture ============ -->
+<div class="modal-backdrop photo-view-backdrop" id="photoViewBackdrop" hidden>
+  <div class="photo-view" id="photoView" role="img" aria-label="Your profile picture"></div>
 </div>
 
 <!-- ============ move-item modal ============ -->
