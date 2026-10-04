@@ -307,11 +307,17 @@
   .acct-stats{color:var(--stone);font-size:0.78rem;}
   .lock-backdrop{position:fixed;inset:0;background:rgba(17,17,17,.45);display:flex;align-items:center;justify-content:center;z-index:200;padding:20px;}
   .lock-backdrop[hidden]{display:none;}
-  .lock-modal{background:var(--white);border-radius:16px;max-width:380px;width:100%;padding:28px 26px 20px;text-align:center;}
+  .lock-modal{position:relative;background:var(--white);border-radius:16px;max-width:380px;width:100%;padding:34px 26px 28px;text-align:center;}
   .lock-modal h3{font-family:Georgia,"Times New Roman",serif;font-size:1.3rem;margin:0 0 8px;}
   .lock-modal p{color:var(--stone);font-size:0.92rem;line-height:1.5;margin:0 0 20px;}
-  .lock-actions{display:flex;gap:10px;justify-content:center;margin-bottom:12px;}
-  .lock-close{background:none;border:0;color:var(--stone);font:inherit;font-size:0.85rem;cursor:pointer;padding:6px;}
+  .lock-actions{display:flex;gap:10px;justify-content:center;}
+  .lock-btn-signup{background:#3D2A5C;color:var(--white);border-color:#3D2A5C;}
+  .lock-btn-signup:hover{background:#2C1D44;border-color:#2C1D44;}
+  .lock-btn-login{background:transparent;color:#3D2A5C;border-color:#3D2A5C;}
+  .lock-btn-login:hover{background:#3D2A5C;color:var(--white);}
+  .lock-x{position:absolute;top:10px;right:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:none;border:0;border-radius:50%;cursor:pointer;color:var(--stone);}
+  .lock-x:hover{background:var(--cream);color:var(--black);}
+  .lock-x svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;}
 
   /* ---------- footer ---------- */
   footer{
@@ -368,13 +374,15 @@
 
   <div class="lock-backdrop" id="lockBackdrop" hidden>
     <div class="lock-modal" role="dialog" aria-modal="true" aria-labelledby="lockTitle">
-      <h3 id="lockTitle">Log in to see more</h3>
-      <p>Create a free Baggle account or log in to open this bag, follow it, and like it.</p>
+      <button class="lock-x" id="lockClose" type="button" aria-label="Close">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <h3 id="lockTitle">Sign up to Baggle</h3>
+      <p>Never miss the latest bags, sign up or log in.</p>
       <div class="lock-actions">
-        <a href="/dashboard/" class="btn btn-solid">Log in</a>
-        <a href="#signup" class="btn btn-outline" id="lockSignup">Sign up</a>
+        <a href="#signup" class="btn lock-btn-signup" id="lockSignup">Sign up</a>
+        <a href="/dashboard/" class="btn lock-btn-login">Log in</a>
       </div>
-      <button class="lock-close" id="lockClose" type="button">Not now</button>
     </div>
   </div>
 
