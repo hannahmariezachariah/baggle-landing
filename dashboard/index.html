@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>My Bags — Baggle</title>
+<title>My profile — Baggle</title>
 <meta name="description" content="Your Baggle dashboard — every item you've saved, organised into bags.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,9 +55,9 @@
       </svg>
     </a>
     <nav>
-      <button class="side-btn active" data-nav="home" title="Home">
-        <svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1H10v-5.5h4V20h3.5a1 1 0 0 0 1-1v-9"/></svg>
-        Home
+      <button class="side-btn active" data-nav="home" title="My profile">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.6"/><path d="M5 20c.6-3.8 3.3-5.9 7-5.9s6.4 2.1 7 5.9"/></svg>
+        My profile
       </button>
       <button class="side-btn" data-nav="notifications" title="Alerts">
         <svg viewBox="0 0 24 24"><path d="M6 10.5a6 6 0 0 1 12 0c0 4 1.5 5.3 1.5 5.3H4.5S6 14.5 6 10.5Z"/><path d="M10 19a2.2 2.2 0 0 0 4 0"/></svg>
@@ -99,8 +99,13 @@
     <!-- ---- HOME VIEW: all bags ---- -->
     <section class="view active" id="view-home">
       <div class="dash-header">
-        <div class="dash-title-row">
-          <h1 class="dash-title">My Bags</h1>
+        <div class="profile-head">
+          <h1 class="dash-title" id="profileName">My profile</h1>
+          <div class="profile-stats" id="profileStats" aria-live="polite">
+            <span><strong id="statFollowers">–</strong> <span id="statFollowersLabel">followers</span></span>
+            <span><strong id="statFollowing">–</strong> following</span>
+            <span><strong id="statBags">0</strong> <span id="statBagsLabel">bags</span></span>
+          </div>
         </div>
       </div>
 
