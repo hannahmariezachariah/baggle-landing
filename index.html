@@ -276,6 +276,43 @@
     color:var(--stone);
   }
 
+  /* ---------- public discovery (hot bags / suggested accounts) ---------- */
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+  .brand-bag{width:26px;height:24px;flex:0 0 auto;}
+  .discover{padding:48px 0 8px;background:var(--white);}
+  .discover-block{margin-bottom:44px;}
+  .discover-title{font-family:Georgia,"Times New Roman",serif;font-size:1.7rem;margin:0 0 4px;}
+  .discover-sub{margin:0 0 20px;color:var(--stone);font-size:0.92rem;}
+  .discover-empty{color:var(--stone);font-size:0.95rem;margin:0 0 40px;}
+  .bag-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;}
+  .acct-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;}
+  .bag-tile,.acct-tile{
+    text-align:left;font-family:inherit;color:var(--black);cursor:pointer;
+    background:var(--white);border:1px solid var(--line);border-radius:14px;padding:0;overflow:hidden;
+    transition:box-shadow .15s ease, transform .15s ease;
+  }
+  .bag-tile:hover,.acct-tile:hover{box-shadow:0 6px 20px rgba(17,17,17,.08);transform:translateY(-2px);}
+  .bag-collage{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;height:170px;background:var(--line);}
+  .bag-collage .ph{background:var(--cream) center/cover no-repeat;}
+  .bag-collage.one{grid-template-columns:1fr;grid-template-rows:1fr;}
+  .bag-collage.two{grid-template-rows:1fr;}
+  .bag-meta{padding:12px 14px 14px;}
+  .bag-name{font-weight:700;font-size:0.95rem;margin:0 0 2px;}
+  .bag-owner{color:var(--stone);font-size:0.82rem;margin:0 0 8px;}
+  .bag-stats{display:flex;gap:12px;color:var(--stone);font-size:0.78rem;font-weight:600;}
+  .bag-stats .heart{color:#FF5C8A;}
+  .acct-tile{display:flex;align-items:center;gap:12px;padding:12px 14px;}
+  .acct-photo{width:46px;height:46px;border-radius:50%;background:var(--cream) center/cover no-repeat;flex:0 0 auto;border:1px solid var(--line);}
+  .acct-name{font-weight:700;font-size:0.92rem;margin:0 0 2px;}
+  .acct-stats{color:var(--stone);font-size:0.78rem;}
+  .lock-backdrop{position:fixed;inset:0;background:rgba(17,17,17,.45);display:flex;align-items:center;justify-content:center;z-index:200;padding:20px;}
+  .lock-backdrop[hidden]{display:none;}
+  .lock-modal{background:var(--white);border-radius:16px;max-width:380px;width:100%;padding:28px 26px 20px;text-align:center;}
+  .lock-modal h3{font-family:Georgia,"Times New Roman",serif;font-size:1.3rem;margin:0 0 8px;}
+  .lock-modal p{color:var(--stone);font-size:0.92rem;line-height:1.5;margin:0 0 20px;}
+  .lock-actions{display:flex;gap:10px;justify-content:center;margin-bottom:12px;}
+  .lock-close{background:none;border:0;color:var(--stone);font:inherit;font-size:0.85rem;cursor:pointer;padding:6px;}
+
   /* ---------- footer ---------- */
   footer{
     border-top:1px solid var(--line);
@@ -293,8 +330,15 @@
 
   <header>
     <div class="nav">
-      <div class="wordmark">baggle</div>
+      <a href="/" class="brand" aria-label="Baggle home">
+        <svg class="brand-bag" viewBox="0 -5 30 32" fill="none" aria-hidden="true">
+          <rect x="0" y="4" width="22" height="20" rx="5.2" fill="#FF5C8A" stroke="#3D2A5C" stroke-width="1.4"/>
+          <path d="M6.3 4 v-2.2 a4.8 4.8 0 0 1 9.6 0 v2.2" fill="none" stroke="#3D2A5C" stroke-width="1.5"/>
+        </svg>
+        <span class="wordmark">baggle</span>
+      </a>
       <nav class="nav-links">
+        <a href="#discover">Hot bags</a>
         <a href="#about">What is Baggle</a>
         <a href="#how-it-works">How it works</a>
         <a href="#app">App</a>
@@ -305,6 +349,34 @@
       </div>
     </div>
   </header>
+
+  <section class="discover" id="discover" hidden>
+    <div class="wrap">
+      <div class="discover-block" id="hotBlock">
+        <h2 class="discover-title">Hot bags this week</h2>
+        <p class="discover-sub">The most-loved bags from public Baggle accounts.</p>
+        <div class="bag-grid" id="hotBags"></div>
+      </div>
+      <div class="discover-block" id="acctBlock">
+        <h2 class="discover-title">Suggested accounts</h2>
+        <p class="discover-sub">Public accounts worth following.</p>
+        <div class="acct-grid" id="suggestedAccounts"></div>
+      </div>
+      <p class="discover-empty" id="discoverEmpty" hidden>No public bags yet &mdash; be the first. Set your account to public from your dashboard and your bags can show up here.</p>
+    </div>
+  </section>
+
+  <div class="lock-backdrop" id="lockBackdrop" hidden>
+    <div class="lock-modal" role="dialog" aria-modal="true" aria-labelledby="lockTitle">
+      <h3 id="lockTitle">Log in to see more</h3>
+      <p>Create a free Baggle account or log in to open this bag, follow it, and like it.</p>
+      <div class="lock-actions">
+        <a href="/dashboard/" class="btn btn-solid">Log in</a>
+        <a href="#signup" class="btn btn-outline" id="lockSignup">Sign up</a>
+      </div>
+      <button class="lock-close" id="lockClose" type="button">Not now</button>
+    </div>
+  </div>
 
   <section class="hero">
     <div class="wrap hero-grid">
@@ -557,5 +629,91 @@
       }
     });
   </script>
+<script>
+  // Public discovery: logged-out visitors only ever get teaser data (bag name,
+  // owner's display name, counts, a few photos) from two SECURITY DEFINER
+  // functions -- no table is opened to the anon role. Everything is inserted
+  // with textContent / style props, never innerHTML, since names and image
+  // URLs come from other people.
+  (function () {
+    const section = document.getElementById("discover");
+    const lock = document.getElementById("lockBackdrop");
+    const openLock = () => { lock.hidden = false; };
+    const closeLock = () => { lock.hidden = true; };
+    document.getElementById("lockClose").addEventListener("click", closeLock);
+    document.getElementById("lockSignup").addEventListener("click", closeLock);
+    lock.addEventListener("click", (e) => { if (e.target === lock) closeLock(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLock(); });
+
+    function el(tag, cls, text) {
+      const n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text != null) n.textContent = text;
+      return n;
+    }
+    function safeUrl(u) { return /^https?:\/\//i.test(u || "") ? u : null; }
+    function bg(node, url) {
+      const ok = safeUrl(url);
+      if (ok) node.style.backgroundImage = "url(" + JSON.stringify(ok) + ")";
+    }
+
+    function bagTile(b) {
+      const tile = el("button", "bag-tile");
+      tile.type = "button";
+      const photos = (b.photos || []).filter(safeUrl).slice(0, 4);
+      const collage = el("div", "bag-collage" + (photos.length <= 1 ? " one" : photos.length === 2 ? " two" : ""));
+      if (photos.length === 0) collage.appendChild(el("div", "ph"));
+      photos.forEach((p) => { const ph = el("div", "ph"); bg(ph, p); collage.appendChild(ph); });
+      const meta = el("div", "bag-meta");
+      meta.appendChild(el("p", "bag-name", b.bag_name));
+      meta.appendChild(el("p", "bag-owner", "by " + b.owner_name));
+      const stats = el("div", "bag-stats");
+      const likes = el("span", null);
+      likes.appendChild(el("span", "heart", "\u2665"));
+      likes.appendChild(document.createTextNode(" " + b.like_count + " this week"));
+      stats.appendChild(likes);
+      stats.appendChild(el("span", null, b.item_count + (Number(b.item_count) === 1 ? " item" : " items")));
+      meta.appendChild(stats);
+      tile.appendChild(collage);
+      tile.appendChild(meta);
+      tile.addEventListener("click", openLock);
+      return tile;
+    }
+
+    function acctTile(a) {
+      const tile = el("button", "acct-tile");
+      tile.type = "button";
+      const photo = el("div", "acct-photo");
+      bg(photo, a.photo);
+      const info = el("div", null);
+      info.appendChild(el("p", "acct-name", a.owner_name));
+      const bags = Number(a.bag_count), fol = Number(a.follower_count);
+      info.appendChild(el("div", "acct-stats",
+        bags + (bags === 1 ? " bag" : " bags") + " \u00b7 " + fol + (fol === 1 ? " follower" : " followers")));
+      tile.appendChild(photo);
+      tile.appendChild(info);
+      tile.addEventListener("click", openLock);
+      return tile;
+    }
+
+    (async function load() {
+      try {
+        const [hot, acc] = await Promise.all([
+          baggleSupabase.rpc("get_hot_bags", { max_rows: 8 }),
+          baggleSupabase.rpc("get_suggested_accounts", { max_rows: 6 })
+        ]);
+        if (hot.error || acc.error) { console.warn("Discovery unavailable", hot.error || acc.error); return; }
+        const bags = hot.data || [], accts = acc.data || [];
+        const hotEl = document.getElementById("hotBags"), acctEl = document.getElementById("suggestedAccounts");
+        bags.forEach((b) => hotEl.appendChild(bagTile(b)));
+        accts.forEach((a) => acctEl.appendChild(acctTile(a)));
+        document.getElementById("hotBlock").hidden = bags.length === 0;
+        document.getElementById("acctBlock").hidden = accts.length === 0;
+        document.getElementById("discoverEmpty").hidden = bags.length + accts.length > 0;
+        section.hidden = false;
+      } catch (err) { console.warn("Discovery unavailable", err); }
+    })();
+  })();
+</script>
 </body>
 </html>

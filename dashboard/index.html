@@ -48,10 +48,12 @@
 <div class="app" id="dashShell" hidden>
 
   <aside class="sidebar">
-    <svg class="logo" viewBox="0 -5 30 32" fill="none">
-      <rect x="0" y="4" width="22" height="20" rx="5.2" fill="#FF5C8A" stroke="#3D2A5C" stroke-width="1.4"/>
-      <path d="M6.3 4 v-2.2 a4.8 4.8 0 0 1 9.6 0 v2.2" fill="none" stroke="#3D2A5C" stroke-width="1.5"/>
-    </svg>
+    <a href="/" class="logo-link" title="Baggle home" aria-label="Baggle home">
+      <svg class="logo" viewBox="0 -5 30 32" fill="none">
+        <rect x="0" y="4" width="22" height="20" rx="5.2" fill="#FF5C8A" stroke="#3D2A5C" stroke-width="1.4"/>
+        <path d="M6.3 4 v-2.2 a4.8 4.8 0 0 1 9.6 0 v2.2" fill="none" stroke="#3D2A5C" stroke-width="1.5"/>
+      </svg>
+    </a>
     <nav>
       <button class="side-btn active" data-nav="home" title="Home">
         <svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1H10v-5.5h4V20h3.5a1 1 0 0 0 1-1v-9"/></svg>
@@ -236,7 +238,7 @@
         <input type="checkbox" id="publicAccountCheckbox">
         <span>Public account — let other Baggle users find and follow your bags</span>
       </label>
-      <p class="field-hint">You can still mark individual bags private even with a public account.</p>
+      <p class="field-hint">Public bags can also appear in a preview on the baggle.net homepage that anyone can see without an account (bag name, your name, a few photos). You can still mark individual bags private.</p>
     </div>
     <p class="modal-error" id="editProfileError"></p>
     <div class="modal-actions">
