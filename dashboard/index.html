@@ -166,35 +166,28 @@
 
     <!-- ---- FOR YOU VIEW: search & discover public bags ---- -->
     <section class="view" id="view-foryou">
-      <div class="dash-header">
-        <div class="dash-title-row">
-          <h1 class="dash-title">For You</h1>
-          <span class="item-count-pill" id="forYouCountPill">0 bags</span>
-        </div>
+      <div class="foryou-search">
+        <input id="forYouSearchInput" class="field-input" type="text" placeholder="Search bags or people…" aria-label="Search bags or people">
+        <button class="icon-btn" id="tuneForYouBtn" type="button" aria-label="Tune your For You" title="Tune your For You">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>
+        </button>
       </div>
-
-      <div class="search-row">
-        <input id="forYouSearchInput" class="field-input" type="text" placeholder="Search bags or people…">
-      </div>
+      <span id="forYouCountPill" hidden></span>
 
       <div class="people-section" id="forYouPeople" hidden>
-        <h2 class="people-heading">People</h2>
         <div class="people-list" id="forYouPeopleList"></div>
       </div>
 
       <div class="picks-section" id="forYouPicks" hidden>
-        <div class="picks-head">
-          <h2 class="people-heading" id="picksHeading">Picked for you</h2>
-          <button class="link-btn" id="tuneForYouBtn" type="button">Tune your For You</button>
-        </div>
-        <p class="picks-sub" id="picksSub"></p>
+        <span id="picksHeading" hidden></span>
+        <span id="picksSub" hidden></span>
         <div class="items-grid picks-grid" id="picksGrid">
           <!-- ranked item cards rendered by dashboard.js -->
         </div>
-        <button class="btn-pill picks-more" id="picksMoreBtn" type="button" hidden>Show more</button>
+        <button class="icon-btn picks-more" id="picksMoreBtn" type="button" aria-label="Show more" title="Show more" hidden><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
       </div>
 
-      <h2 class="people-heading all-bags-heading" id="allBagsHeading" hidden>Explore public bags</h2>
+      <span id="allBagsHeading" hidden></span>
 
       <div class="bags-grid" id="forYouGrid">
         <!-- public bag cards rendered by dashboard.js -->
