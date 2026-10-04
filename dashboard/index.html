@@ -229,6 +229,14 @@
 <div class="modal-backdrop" id="editProfileBackdrop" hidden>
   <div class="modal">
     <h3>Edit profile</h3>
+    <div class="avatar-edit-row">
+      <div class="avatar avatar-preview" id="avatarPreview" aria-hidden="true">—</div>
+      <div class="avatar-edit-actions">
+        <button type="button" class="btn-pill" id="avatarChangeBtn">Change photo</button>
+        <button type="button" class="avatar-remove" id="avatarRemoveBtn" hidden>Remove photo</button>
+      </div>
+      <input type="file" id="avatarFileInput" accept="image/*" hidden>
+    </div>
     <label class="field-label">First name</label>
     <input id="editFirstNameInput" class="field-input" type="text" placeholder="Jane" maxlength="60" autocomplete="given-name">
     <label class="field-label">Last name</label>
