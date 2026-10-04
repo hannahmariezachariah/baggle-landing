@@ -9,719 +9,276 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -5 30 32'%3E%3Crect x='0' y='4' width='22' height='20' rx='5.2' fill='%23FF5C8A' stroke='%233D2A5C' stroke-width='1.4'/%3E%3Cpath d='M6.3 4 v-2.2 a4.8 4.8 0 0 1 9.6 0 v2.2' fill='none' stroke='%233D2A5C' stroke-width='1.5'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/site.css">
 <style>
-  :root{
-    --black:#111111;
-    --white:#FFFFFF;
-    --cream:#F7F4EF;
-    --stone:#6E6A63;
-    --stone-light:#A39D91;
-    --line:#E4DFD6;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  html,body{margin:0;padding:0;}
-  body{
-    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    color:var(--black);
-    background:var(--white);
-    -webkit-font-smoothing:antialiased;
-  }
-  a{text-decoration:none;color:inherit;}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
-
-  /* ---------- header ---------- */
-  header{
-    position:sticky;top:0;z-index:50;
-    background:rgba(255,255,255,0.92);
-    backdrop-filter:saturate(180%) blur(10px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:22px 32px;
-    max-width:1180px;margin:0 auto;
-  }
-  .wordmark{
-    font-family:Georgia, "Times New Roman", serif;
-    font-size:1.65rem;
-    font-weight:700;
-    letter-spacing:0.01em;
-    color:var(--black);
-  }
-  .nav-links{
-    display:flex;gap:36px;
-    font-size:0.88rem;
-    font-weight:500;
-    color:var(--black);
-  }
-  .nav-links a{opacity:0.72;transition:opacity 0.15s;}
-  .nav-links a:hover{opacity:1;}
-  .nav-actions{display:flex;align-items:center;gap:22px;}
-  .link-btn{font-size:0.88rem;font-weight:600;}
-  .btn{
-    display:inline-flex;align-items:center;justify-content:center;
-    padding:11px 24px;
-    font-size:0.85rem;
-    font-weight:600;
-    letter-spacing:0.01em;
-    border-radius:3px;
-    cursor:pointer;
-    border:1.5px solid var(--black);
-    transition:background 0.15s ease, color 0.15s ease, opacity 0.15s ease;
-  }
-  .btn-solid{background:var(--black);color:var(--white);}
-  .btn-solid:hover{opacity:0.82;}
-  .btn-outline{background:transparent;color:var(--black);}
-  .btn-outline:hover{background:var(--black);color:var(--white);}
-  @media (max-width:820px){
-    .nav-links{display:none;}
-  }
-
-  /* ---------- hero ---------- */
-  .hero{
-    padding:88px 0 100px;
-  }
-  .hero-grid{
+  /* One screen, no scrolling on desktop: steps on the left, login card on the right. */
+  .home{
+    flex:1;
     display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:64px;
+    grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr);
+    gap:72px;
     align-items:center;
+    width:100%;max-width:1120px;margin:0 auto;
+    padding:24px 32px;
   }
-  .hero h1{
-    font-family:Georgia, "Times New Roman", serif;
-    font-size:clamp(2.2rem,4.1vw,3.4rem);
-    line-height:1.14;
-    font-weight:700;
-    letter-spacing:-0.01em;
-    margin:0 0 24px;
+  .eyebrow{
+    font-size:0.76rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
+    color:var(--stone-light);margin-bottom:14px;
   }
-  .hero p{
-    font-size:1.08rem;
-    line-height:1.65;
-    color:var(--stone);
-    max-width:480px;
-    margin:0 0 34px;
+  .home h1{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:clamp(2rem,3.6vw,3rem);line-height:1.15;font-weight:700;letter-spacing:-0.01em;
+    margin:0 0 38px;max-width:520px;
   }
-  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
-  .hero-visual{
-    display:flex;align-items:center;justify-content:center;
+  .steps{
+    list-style:none;margin:0;padding:0;
+    display:grid;grid-template-columns:1fr 1fr;gap:30px 36px;
   }
-  .hero-popup-wrap{
-    width:100%;
-    max-width:420px;
-    filter:drop-shadow(0 24px 44px rgba(17,17,17,0.14));
+  .step-num{font-family:Georgia,serif;font-size:1.9rem;color:var(--stone-light);margin-bottom:8px;}
+  .step h3{font-size:1.02rem;font-weight:700;margin:0 0 6px;}
+  .step p{font-size:0.9rem;line-height:1.55;color:var(--stone);margin:0;}
+
+  /* ---------- login card (Instagram-style, Baggle colours) ---------- */
+  .card{
+    width:100%;max-width:400px;justify-self:center;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:30px 28px 26px;
+    box-shadow:0 24px 44px rgba(17,17,17,0.08);
   }
-  .hero-popup-wrap svg{width:100%;height:auto;display:block;}
+  .card-brand{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+  .card-brand svg{width:34px;height:31px;}
+  .card-brand span{font-size:1.5rem;font-weight:800;color:var(--purple);letter-spacing:-0.01em;}
+  .card h2{font-size:1.15rem;font-weight:700;color:var(--purple);margin:0 0 6px;}
+  .card .sub{font-size:0.86rem;line-height:1.5;color:var(--stone);margin:0 0 16px;}
+  .card form{display:flex;flex-direction:column;gap:10px;}
+  .card h2 + form{margin-top:14px;}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .card input{
+    width:100%;padding:14px 16px;
+    border:1.5px solid var(--line);border-radius:12px;
+    font-family:inherit;font-size:0.95rem;color:var(--purple);
+    background:var(--white);outline:none;
+    transition:border-color .15s ease;
+  }
+  .card input::placeholder{color:#A99FB5;}
+  .card input:focus{border-color:var(--purple);}
+  .card .btn{margin-top:6px;}
+  .status{min-height:1.2em;margin:8px 0 0;font-size:0.84rem;color:var(--stone);text-align:center;}
+  .status.error{color:#C14343;}
+  .card-link{
+    display:block;margin:12px auto 0;background:none;border:0;cursor:pointer;
+    font-size:0.88rem;font-weight:600;color:var(--purple);text-align:center;
+  }
+  .card-link:hover{text-decoration:underline;}
+  .divider{height:1px;background:var(--line);margin:20px 0;}
+  .swap-line{text-align:center;font-size:0.88rem;color:var(--stone);margin:16px 0 0;}
+  .swap-line button{background:none;border:0;padding:0;cursor:pointer;font-size:inherit;font-weight:700;color:var(--purple);}
+  .swap-line button:hover{text-decoration:underline;}
+  [hidden]{display:none !important;}
+
   @media (max-width:900px){
-    .hero-grid{grid-template-columns:1fr;}
-    .hero-visual{order:-1;}
+    .home{grid-template-columns:1fr;gap:40px;padding:28px 20px 12px;}
+    .card{order:-1;}
+    .home h1{margin-bottom:26px;}
   }
   @media (max-width:520px){
-    .hero-popup-wrap{max-width:320px;}
+    .steps{grid-template-columns:1fr;gap:22px;}
+    .card{padding:26px 20px 22px;}
   }
-
-  /* ---------- section shared ---------- */
-  section{padding:96px 0;}
-  .section-cream{background:var(--cream);}
-  .eyebrow{
-    font-size:0.76rem;
-    font-weight:700;
-    letter-spacing:0.16em;
-    text-transform:uppercase;
-    color:var(--stone-light);
-    margin-bottom:16px;
-  }
-  h2{
-    font-family:Georgia, "Times New Roman", serif;
-    font-size:clamp(1.7rem,3vw,2.5rem);
-    line-height:1.22;
-    font-weight:700;
-    letter-spacing:-0.01em;
-    margin:0 0 22px;
-    max-width:680px;
-  }
-
-  /* ---------- what is baggle ---------- */
-  .about-grid{
-    display:grid;
-    grid-template-columns:1.1fr 0.9fr;
-    gap:72px;
-    align-items:start;
-  }
-  .about-grid p{
-    font-size:1.02rem;
-    line-height:1.75;
-    color:var(--stone);
-    max-width:520px;
-  }
-  .about-grid p + p{margin-top:18px;}
-  .features{
-    display:flex;
-    flex-direction:column;
-    gap:0;
-    border-top:1px solid var(--line);
-  }
-  .feature-row{
-    display:flex;
-    align-items:center;
-    gap:18px;
-    padding:22px 0;
-    border-bottom:1px solid var(--line);
-  }
-  .feature-num{
-    font-family:Georgia, serif;
-    font-size:0.85rem;
-    color:var(--stone-light);
-    width:26px;
-    flex:0 0 auto;
-  }
-  .feature-row span.label{
-    font-size:1rem;
-    font-weight:500;
-  }
-  @media (max-width:900px){
-    .about-grid{grid-template-columns:1fr;gap:40px;}
-  }
-
-  /* ---------- how it works ---------- */
-  .steps{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:40px;
-    margin-top:56px;
-  }
-  .step-num{
-    font-family:Georgia, serif;
-    font-size:2.1rem;
-    color:var(--stone-light);
-    margin-bottom:18px;
-  }
-  .step h3{
-    font-size:1.05rem;
-    font-weight:700;
-    margin:0 0 10px;
-  }
-  .step p{
-    font-size:0.92rem;
-    line-height:1.6;
-    color:var(--stone);
-    margin:0;
-  }
-  @media (max-width:900px){
-    .steps{grid-template-columns:1fr 1fr;row-gap:44px;}
-  }
-  @media (max-width:560px){
-    .steps{grid-template-columns:1fr;}
-  }
-
-  /* ---------- app banner ---------- */
-  .app-banner{
-    background:var(--black);
-    color:var(--cream);
-    text-align:center;
-  }
-  .app-banner .eyebrow{color:var(--stone-light);}
-  .app-banner h2{
-    color:var(--white);
-    margin:0 auto 18px;
-  }
-  .app-banner p{
-    color:#C9C4B8;
-    font-size:1.02rem;
-    max-width:480px;
-    margin:0 auto;
-  }
-
-  /* ---------- signup strip ---------- */
-  .signup{
-    text-align:center;
-  }
-  .signup h2{margin:0 auto 14px;}
-  .signup p{
-    color:var(--stone);
-    font-size:1.02rem;
-    max-width:460px;
-    margin:0 auto 34px;
-  }
-  .signup-form{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    max-width:420px;margin:0 auto;
-  }
-  .signup-form input{
-    width:100%;
-    padding:14px 18px;
-    border:1.5px solid var(--line);
-    border-radius:3px;
-    font-family:"Inter",sans-serif;
-    font-size:0.95rem;
-    background:var(--white);
-    outline:none;
-  }
-  .signup-form input:focus{border-color:var(--black);}
-  .signup-form input.full{grid-column:1 / -1;}
-  .signup-form button{border-radius:3px;grid-column:1 / -1;margin-top:4px;}
-  .signup-status{
-    margin-top:14px;
-    font-size:0.86rem;
-    color:var(--stone);
-    min-height:1.2em;
-  }
-  .signup-status.error{color:#C14343;}
-  .signup-foot{
-    margin-top:18px;
-    font-size:0.86rem;
-    color:var(--stone);
-  }
-
-  /* ---------- public discovery (hot bags / suggested accounts) ---------- */
-  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
-  .brand-bag{width:26px;height:24px;flex:0 0 auto;}
-  .discover{padding:48px 0 8px;background:var(--white);}
-  .discover-block{margin-bottom:44px;}
-  .discover-title{font-family:Georgia,"Times New Roman",serif;font-size:1.7rem;margin:0 0 4px;}
-  .discover-sub{margin:0 0 20px;color:var(--stone);font-size:0.92rem;}
-  .discover-empty{color:var(--stone);font-size:0.95rem;margin:0 0 40px;}
-  .bag-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;}
-  .acct-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;}
-  .bag-tile,.acct-tile{
-    text-align:left;font-family:inherit;color:var(--black);cursor:pointer;
-    background:var(--white);border:1px solid var(--line);border-radius:14px;padding:0;overflow:hidden;
-    transition:box-shadow .15s ease, transform .15s ease;
-  }
-  .bag-tile:hover,.acct-tile:hover{box-shadow:0 6px 20px rgba(17,17,17,.08);transform:translateY(-2px);}
-  .bag-collage{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;height:170px;background:var(--line);}
-  .bag-collage .ph{background:var(--cream) center/cover no-repeat;}
-  .bag-collage.one{grid-template-columns:1fr;grid-template-rows:1fr;}
-  .bag-collage.two{grid-template-rows:1fr;}
-  .bag-meta{padding:12px 14px 14px;}
-  .bag-name{font-weight:700;font-size:0.95rem;margin:0 0 2px;}
-  .bag-owner{color:var(--stone);font-size:0.82rem;margin:0 0 8px;}
-  .bag-stats{display:flex;gap:12px;color:var(--stone);font-size:0.78rem;font-weight:600;}
-  .bag-stats .heart{color:#FF5C8A;}
-  .acct-tile{display:flex;align-items:center;gap:12px;padding:12px 14px;}
-  .acct-photo{width:46px;height:46px;border-radius:50%;background:var(--cream) center/cover no-repeat;flex:0 0 auto;border:1px solid var(--line);}
-  .acct-name{font-weight:700;font-size:0.92rem;margin:0 0 2px;}
-  .acct-stats{color:var(--stone);font-size:0.78rem;}
-  .lock-backdrop{position:fixed;inset:0;background:rgba(17,17,17,.45);display:flex;align-items:center;justify-content:center;z-index:200;padding:20px;}
-  .lock-backdrop[hidden]{display:none;}
-  .lock-modal{position:relative;background:var(--white);border-radius:16px;max-width:380px;width:100%;padding:34px 26px 28px;text-align:center;}
-  .lock-modal h3{font-family:Georgia,"Times New Roman",serif;font-size:1.3rem;margin:0 0 8px;}
-  .lock-modal p{color:var(--stone);font-size:0.92rem;line-height:1.5;margin:0 0 20px;}
-  .lock-actions{display:flex;gap:10px;justify-content:center;}
-  .lock-btn-signup{background:#3D2A5C;color:var(--white);border-color:#3D2A5C;}
-  .lock-btn-signup:hover{background:#2C1D44;border-color:#2C1D44;}
-  .lock-btn-login{background:transparent;color:#3D2A5C;border-color:#3D2A5C;}
-  .lock-btn-login:hover{background:#3D2A5C;color:var(--white);}
-  .lock-x{position:absolute;top:10px;right:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:none;border:0;border-radius:50%;cursor:pointer;color:var(--stone);}
-  .lock-x:hover{background:var(--cream);color:var(--black);}
-  .lock-x svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;}
-
-  /* ---------- footer ---------- */
-  footer{
-    border-top:1px solid var(--line);
-    padding:44px 0;
-  }
-  .footer-row{
-    display:flex;align-items:center;justify-content:space-between;
-    flex-wrap:wrap;gap:16px;
-  }
-  .footer-links{display:flex;gap:24px;font-size:0.84rem;color:var(--stone);}
-  .footer-copy{font-size:0.82rem;color:var(--stone-light);}
 </style>
 </head>
 <body>
 
-  <header>
-    <div class="nav">
-      <a href="/" class="brand" aria-label="Baggle home">
-        <svg class="brand-bag" viewBox="0 -5 30 32" fill="none" aria-hidden="true">
-          <rect x="0" y="4" width="22" height="20" rx="5.2" fill="#FF5C8A" stroke="#3D2A5C" stroke-width="1.4"/>
-          <path d="M6.3 4 v-2.2 a4.8 4.8 0 0 1 9.6 0 v2.2" fill="none" stroke="#3D2A5C" stroke-width="1.5"/>
-        </svg>
-        <span class="wordmark">baggle</span>
-      </a>
-      <nav class="nav-links">
-        <a href="#discover">Hot bags</a>
-        <a href="#about">What is Baggle</a>
-        <a href="#how-it-works">How it works</a>
-        <a href="#app">App</a>
-      </nav>
-      <div class="nav-actions">
-        <a href="/dashboard/" class="link-btn">Log in</a>
-        <a href="#signup" class="btn btn-solid">Sign up</a>
-      </div>
-    </div>
-  </header>
+<header class="site-header">
+  <a href="/" class="brand" aria-label="Baggle home">
+    <svg class="brand-bag" viewBox="0 -5 30 32" fill="none" aria-hidden="true">
+      <rect x="0" y="4" width="22" height="20" rx="5.2" fill="#FF5C8A" stroke="#3D2A5C" stroke-width="1.4"/>
+      <path d="M6.3 4 v-2.2 a4.8 4.8 0 0 1 9.6 0 v2.2" fill="none" stroke="#3D2A5C" stroke-width="1.5"/>
+    </svg>
+    <span class="wordmark">baggle</span>
+  </a>
+  <nav class="site-nav">
+    <a href="/for-you.html" class="nav-tab">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      For You
+    </a>
+  </nav>
+</header>
 
-  <section class="discover" id="discover" hidden>
-    <div class="wrap">
-      <div class="discover-block" id="hotBlock">
-        <h2 class="discover-title">Hot bags this week</h2>
-        <p class="discover-sub">The most-loved bags from public Baggle accounts.</p>
-        <div class="bag-grid" id="hotBags"></div>
-      </div>
-      <div class="discover-block" id="acctBlock">
-        <h2 class="discover-title">Suggested accounts</h2>
-        <p class="discover-sub">Public accounts worth following.</p>
-        <div class="acct-grid" id="suggestedAccounts"></div>
-      </div>
-      <p class="discover-empty" id="discoverEmpty" hidden>No public bags yet &mdash; be the first. Set your account to public from your dashboard and your bags can show up here.</p>
-    </div>
+<main class="home">
+  <section>
+    <div class="eyebrow">How it works</div>
+    <h1>From tab to bag in four steps.</h1>
+    <ol class="steps">
+      <li class="step"><div class="step-num">01</div><h3>Download Baggle</h3><p>Add the extension to your browser in a couple of clicks.</p></li>
+      <li class="step"><div class="step-num">02</div><h3>Create an account</h3><p>Set up your Baggle account so everything's saved in one place.</p></li>
+      <li class="step"><div class="step-num">03</div><h3>Start shopping</h3><p>Browse any online store, just like you normally would.</p></li>
+      <li class="step"><div class="step-num">04</div><h3>Bag it</h3><p>Save any item you like to your dedicated bag, and revisit whenever you're ready.</p></li>
+    </ol>
   </section>
 
-  <div class="lock-backdrop" id="lockBackdrop" hidden>
-    <div class="lock-modal" role="dialog" aria-modal="true" aria-labelledby="lockTitle">
-      <button class="lock-x" id="lockClose" type="button" aria-label="Close">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-      </button>
-      <h3 id="lockTitle">Sign up to Baggle</h3>
-      <p>Follow the bags everyone’s talking about.</p>
-      <div class="lock-actions">
-        <a href="#signup" class="btn lock-btn-signup" id="lockSignup">Sign up</a>
-        <a href="/dashboard/" class="btn lock-btn-login">Log in</a>
-      </div>
+  <section class="card" aria-live="polite">
+    <div class="card-brand">
+      <svg viewBox="0 -5 30 32" fill="none" aria-hidden="true">
+        <rect x="0" y="4" width="22" height="20" rx="5.2" fill="#FF5C8A" stroke="#3D2A5C" stroke-width="1.4"/>
+        <path d="M6.3 4 v-2.2 a4.8 4.8 0 0 1 9.6 0 v2.2" fill="none" stroke="#3D2A5C" stroke-width="1.5"/>
+      </svg>
+      <span>baggle</span>
     </div>
-  </div>
 
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <h1>One place to save everything you love, from any store.</h1>
-        <p>Get notified when prices fall and your favourite item is back in stock. Be the first to shop with Baggle.</p>
-        <div class="hero-ctas">
-          <a href="#signup" class="btn btn-solid">Get started</a>
-          <a href="#how-it-works" class="btn btn-outline">How it works</a>
-        </div>
-      </div>
-      <div class="hero-visual">
-        <div class="hero-popup-wrap">
-            <svg viewBox="0 0 376 468" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <clipPath id="thumbClip">
-                  <rect x="38" y="114" width="60" height="60" rx="4"/>
-                </clipPath>
-              </defs>
-              <g>
-                <rect x="0" y="0" width="376" height="468" rx="14" fill="#FFFDF8" stroke="#E4DFD6" stroke-width="1.5"/>
-
-                <!-- header -->
-                <rect x="24" y="22" width="30" height="27" rx="7" fill="#FF5C8A" stroke="#3D2A5C" stroke-width="1.6"/>
-                <path d="M32.5 22 v-3 a6.5 6.5 0 0 1 13 0 v3" fill="none" stroke="#3D2A5C" stroke-width="1.8"/>
-                <text x="64" y="43" font-family="Inter, sans-serif" font-size="19" font-weight="800" fill="#3D2A5C">baggle</text>
-
-                <!-- tabs -->
-                <line x1="24" y1="82" x2="352" y2="82" stroke="#EDE7DC" stroke-width="1.4"/>
-                <text x="24" y="76" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#3D2A5C">Save item</text>
-                <line x1="24" y1="84" x2="76" y2="84" stroke="#3D2A5C" stroke-width="2"/>
-                <text x="124" y="76" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#A39D91">My bags</text>
-                <text x="224" y="76" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#A39D91">Notifications</text>
-
-                <!-- item card -->
-                <rect x="24" y="100" width="328" height="108" rx="8" fill="#FCEAF0"/>
-                <rect x="38" y="114" width="60" height="60" rx="4" fill="#F6EDF1"/>
-                <image href="data:image/jpeg;base64,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" x="38" y="114" width="60" height="60" preserveAspectRatio="xMidYMid meet" clip-path="url(#thumbClip)"/>
-                <rect x="38" y="114" width="60" height="60" rx="4" fill="none" stroke="#F0D9E3" stroke-width="1"/>
-                <text x="110" y="121" font-family="Inter, sans-serif" font-size="8" font-weight="700" letter-spacing="0.06em" fill="#9C8FA6">ITEM NAME</text>
-                <rect x="110" y="127" width="228" height="20" rx="4" fill="#FFFFFF" stroke="#EFD8E2"/>
-                <text x="118" y="141" font-family="Inter, sans-serif" font-size="9.5" fill="#3D2A5C">Ruffled top</text>
-
-                <text x="110" y="159" font-family="Inter, sans-serif" font-size="8" font-weight="700" letter-spacing="0.06em" fill="#9C8FA6">PRICE</text>
-                <rect x="110" y="165" width="100" height="20" rx="4" fill="#FFFFFF" stroke="#EFD8E2"/>
-                <text x="118" y="179" font-family="Inter, sans-serif" font-size="9.5" fill="#3D2A5C">&#163;70</text>
-
-                <text x="222" y="159" font-family="Inter, sans-serif" font-size="8" font-weight="700" letter-spacing="0.06em" fill="#9C8FA6">SIZE</text>
-                <rect x="222" y="165" width="116" height="20" rx="4" fill="#FFFFFF" stroke="#EFD8E2"/>
-                <text x="230" y="179" font-family="Inter, sans-serif" font-size="9" fill="#B9AFC2">e.g. UK 10</text>
-
-                <text x="38" y="194" font-family="Inter, sans-serif" font-size="8" font-weight="700" letter-spacing="0.06em" fill="#9C8FA6">FROM</text>
-                <text x="38" y="204" font-family="Inter, sans-serif" font-size="9.5" font-weight="600" fill="#3D2A5C">Online store</text>
-
-                <!-- choose a bag -->
-                <text x="24" y="234" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#3D2A5C">Choose a bag</text>
-
-                <rect x="24" y="244" width="328" height="30" rx="6" fill="#FCEAF0" stroke="#F6C9DA" stroke-width="1.2"/>
-                <circle cx="40" cy="259" r="6" fill="none" stroke="#FF5C8A" stroke-width="1.6"/>
-                <circle cx="40" cy="259" r="2.6" fill="#FF5C8A"/>
-                <text x="56" y="263" font-family="Inter, sans-serif" font-size="10.5" font-weight="600" fill="#3D2A5C">Winter Wardrobe</text>
-                <text x="336" y="263" font-family="Inter, sans-serif" font-size="10" fill="#B9AFC2" text-anchor="end">12</text>
-
-                <rect x="24" y="278" width="328" height="30" rx="6" fill="none" stroke="#EDE7DC" stroke-width="1.2"/>
-                <circle cx="40" cy="293" r="6" fill="none" stroke="#D8D2C6" stroke-width="1.6"/>
-                <text x="56" y="297" font-family="Inter, sans-serif" font-size="10.5" font-weight="500" fill="#6E6A63">Home</text>
-                <text x="336" y="297" font-family="Inter, sans-serif" font-size="10" fill="#B9AFC2" text-anchor="end">4</text>
-
-                <rect x="24" y="312" width="328" height="30" rx="6" fill="none" stroke="#EDE7DC" stroke-width="1.2"/>
-                <circle cx="40" cy="327" r="6" fill="none" stroke="#D8D2C6" stroke-width="1.6"/>
-                <text x="56" y="331" font-family="Inter, sans-serif" font-size="10.5" font-weight="500" fill="#6E6A63">Gifting</text>
-                <text x="336" y="331" font-family="Inter, sans-serif" font-size="10" fill="#B9AFC2" text-anchor="end">2</text>
-
-                <!-- new bag row -->
-                <rect x="24" y="352" width="248" height="28" rx="6" fill="#FFFFFF" stroke="#EDE7DC" stroke-width="1.2"/>
-                <text x="36" y="370" font-family="Inter, sans-serif" font-size="9.5" fill="#B9AFC2">+ new bag name</text>
-                <rect x="280" y="352" width="72" height="28" rx="6" fill="none" stroke="#3D2A5C" stroke-width="1.4"/>
-                <text x="316" y="370" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#3D2A5C" text-anchor="middle">Create</text>
-
-                <!-- bag it button -->
-                <rect x="24" y="394" width="328" height="42" rx="8" fill="#3D2A5C"/>
-                <text x="188" y="420" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#FFFDF8" text-anchor="middle">Bag it</text>
-
-                <!-- footer -->
-                <line x1="0" y1="446" x2="376" y2="446" stroke="#EDE7DC" stroke-width="1.2"/>
-                <text x="24" y="462" font-family="Inter, sans-serif" font-size="9.5" fill="#9C8FA6">you@email.com</text>
-                <text x="352" y="462" font-family="Inter, sans-serif" font-size="9.5" font-weight="600" fill="#3D2A5C" text-anchor="end">Log out</text>
-              </g>
-            </svg>
-          </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section-cream" id="about">
-    <div class="wrap about-grid">
-      <div>
-        <div class="eyebrow">What is Baggle</div>
-        <h2>Overwhelmed by your online shopping experience?</h2>
-        <p>Baggle removes the stress from shopping online. Forget the open tabs, forget the pressure to buy right now, simply save anything you want, or might want, to Baggle and come back to it whenever you like.</p>
-        <p>No more spam filling up your inbox. Just a quiet notification on your Baggle account when the price actually drops.</p>
-      </div>
-      <div class="features">
-        <div class="feature-row"><span class="feature-num">01</span><span class="label">Save items from any online store</span></div>
-        <div class="feature-row"><span class="feature-num">02</span><span class="label">Create bags dedicated to your specific needs</span></div>
-        <div class="feature-row"><span class="feature-num">03</span><span class="label">Get notified when the price drops</span></div>
-        <div class="feature-row"><span class="feature-num">04</span><span class="label">Never lose track of your wishlist</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="how-it-works">
-    <div class="wrap">
-      <div class="eyebrow">How it works</div>
-      <h2>From tab to bag in four steps.</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">01</div>
-          <h3>Download Baggle</h3>
-          <p>Add the extension to your browser in a couple of clicks.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">02</div>
-          <h3>Create an account</h3>
-          <p>Set up your Baggle account so everything's saved in one place.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">03</div>
-          <h3>Start shopping</h3>
-          <p>Browse any online store, just like you normally would.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">04</div>
-          <h3>Bag it</h3>
-          <p>Save any item you like to your dedicated bag, and revisit whenever you're ready.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="signup" id="signup">
-    <div class="wrap">
-      <h2 style="margin-left:auto;margin-right:auto;">Create your free Baggle account.</h2>
-      <p>Save items from any store, get price-drop and back-in-stock alerts, and pick up right where you left off on any device.</p>
-      <form class="signup-form" id="signup-form">
-        <input type="text" id="signupFirstName" placeholder="First name" autocomplete="given-name" required>
-        <input type="text" id="signupLastName" placeholder="Last name" autocomplete="family-name" required>
-        <input type="email" id="signupEmail" class="full" placeholder="Email address" autocomplete="email" required>
-        <input type="password" id="signupPassword" class="full" placeholder="Password (at least 6 characters)" autocomplete="new-password" minlength="6" required>
-        <button type="submit" class="btn btn-solid" id="signupSubmitBtn">Sign up</button>
+    <!-- log in -->
+    <div id="viewLogin" hidden>
+      <h2>Log into Baggle</h2>
+      <form id="loginForm" novalidate>
+        <input type="email" id="loginEmail" placeholder="Email address" autocomplete="email" required>
+        <input type="password" id="loginPassword" placeholder="Password" autocomplete="current-password" required>
+        <button type="submit" class="btn btn-solid" id="loginBtn">Log in</button>
       </form>
-      <div class="signup-status" id="signup-status"></div>
-      <p class="signup-foot">Already have an account? <a href="/dashboard/" class="link-btn">Log in</a></p>
+      <div class="status" id="loginStatus"></div>
+      <button type="button" class="card-link" id="forgotBtn">Forgot password?</button>
+      <div class="divider"></div>
+      <button type="button" class="btn btn-outline" id="showSignup">Create new account</button>
+    </div>
+
+    <!-- sign up -->
+    <div id="viewSignup" hidden>
+      <h2>Create your free account</h2>
+      <p class="sub">Save items from any store and get price-drop and back-in-stock alerts.</p>
+      <form id="signupForm" novalidate>
+        <div class="row2">
+          <input type="text" id="signupFirst" placeholder="First name" autocomplete="given-name" required>
+          <input type="text" id="signupLast" placeholder="Last name" autocomplete="family-name" required>
+        </div>
+        <input type="email" id="signupEmail" placeholder="Email address" autocomplete="email" required>
+        <input type="password" id="signupPassword" placeholder="Password (at least 6 characters)" autocomplete="new-password" minlength="6" required>
+        <button type="submit" class="btn btn-solid" id="signupBtn">Sign up</button>
+      </form>
+      <div class="status" id="signupStatus"></div>
+      <p class="swap-line">Already have an account? <button type="button" id="showLogin">Log in</button></p>
+    </div>
+
+    <!-- already signed in -->
+    <div id="viewSession" hidden>
+      <h2>Welcome back</h2>
+      <p class="sub" id="sessionEmail"></p>
+      <a href="/dashboard/" class="btn btn-solid">Open my bags</a>
+      <button type="button" class="card-link" id="logoutBtn">Log out</button>
     </div>
   </section>
+</main>
 
-  <section class="app-banner" id="app">
-    <div class="wrap">
-      <div class="eyebrow">Coming next</div>
-      <h2>The Baggle app is on the way.</h2>
-      <p>We're building a home for your bags beyond the browser, so you can shop, save, and check in on your bags from anywhere.</p>
-    </div>
-  </section>
+<footer class="mini-foot">&copy; 2026 Baggle &middot; <a href="/privacy.html">Privacy</a></footer>
 
-  <footer>
-    <div class="wrap footer-row">
-      <div class="wordmark" style="font-size:1.15rem;">baggle</div>
-      <div class="footer-links">
-        <a href="#about">What is Baggle</a>
-        <a href="#how-it-works">How it works</a>
-        <a href="#app">App</a>
-        <a href="/privacy.html">Privacy</a>
-      </div>
-      <div class="footer-copy">&copy; 2026 Baggle · baggle.net</div>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script>
-    // Same Supabase project as the extension/dashboard (shared/supabase-config.js
-    // in the Bagged repo) — this is the public "anon"/"publishable" key, safe to
-    // ship in a plain static page because Row Level Security is what actually
-    // protects people's data, not keeping this key secret.
-    const baggleSupabase = supabase.createClient(
-      "https://wndqubtncxtbninmojpx.supabase.co",
-      "sb_publishable_vfYfD-LtUoJEbjkvhEdckg_PbAEr-PJ"
-    );
-
-    const signupForm = document.getElementById('signup-form');
-    const signupStatus = document.getElementById('signup-status');
-    const signupSubmitBtn = document.getElementById('signupSubmitBtn');
-
-    signupForm.addEventListener('submit', async function(e){
-      e.preventDefault();
-      const firstName = document.getElementById('signupFirstName').value.trim();
-      const lastName = document.getElementById('signupLastName').value.trim();
-      const email = document.getElementById('signupEmail').value.trim();
-      const password = document.getElementById('signupPassword').value;
-
-      signupStatus.classList.remove('error');
-      signupStatus.textContent = '';
-
-      if (!firstName || !lastName) {
-        signupStatus.classList.add('error');
-        signupStatus.textContent = 'Enter your first and last name.';
-        return;
-      }
-      if (password.length < 6) {
-        signupStatus.classList.add('error');
-        signupStatus.textContent = 'Password must be at least 6 characters.';
-        return;
-      }
-
-      signupSubmitBtn.disabled = true;
-      const originalLabel = signupSubmitBtn.textContent;
-      signupSubmitBtn.textContent = 'Signing up…';
-
-      try {
-        const { data, error } = await baggleSupabase.auth.signUp({
-          email,
-          password,
-          options: {
-            data: {
-              first_name: firstName,
-              last_name: lastName,
-              full_name: `${firstName} ${lastName}`
-            },
-            emailRedirectTo: "https://baggle.net/dashboard/"
-          }
-        });
-        if (error) {
-          signupStatus.classList.add('error');
-          signupStatus.textContent = error.message;
-          return;
-        }
-        if (data.session) {
-          // Email confirmation happens to be off — go straight to the dashboard.
-          window.location.href = '/dashboard/';
-          return;
-        }
-        signupForm.reset();
-        signupStatus.textContent = "Check your email to confirm your account, then log in.";
-      } catch (err) {
-        console.error(err);
-        signupStatus.classList.add('error');
-        signupStatus.textContent = "Something went wrong — check your connection and try again.";
-      } finally {
-        signupSubmitBtn.disabled = false;
-        signupSubmitBtn.textContent = originalLabel;
-      }
-    });
-  </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  // Public discovery: logged-out visitors only ever get teaser data (bag name,
-  // owner's display name, counts, a few photos) from two SECURITY DEFINER
-  // functions -- no table is opened to the anon role. Everything is inserted
-  // with textContent / style props, never innerHTML, since names and image
-  // URLs come from other people.
-  (function () {
-    const section = document.getElementById("discover");
-    const lock = document.getElementById("lockBackdrop");
-    const openLock = () => { lock.hidden = false; };
-    const closeLock = () => { lock.hidden = true; };
-    document.getElementById("lockClose").addEventListener("click", closeLock);
-    document.getElementById("lockSignup").addEventListener("click", closeLock);
-    lock.addEventListener("click", (e) => { if (e.target === lock) closeLock(); });
-    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLock(); });
+  // Same Supabase project and the same session storage key as the dashboard
+  // (web-dashboard/dashboard.js), so logging in here carries straight over to
+  // /dashboard/ -- they're both on baggle.net. This is the public "anon" key,
+  // safe in a static page because Row Level Security is what protects data.
+  const baggleSupabase = supabase.createClient(
+    "https://wndqubtncxtbninmojpx.supabase.co",
+    "sb_publishable_vfYfD-LtUoJEbjkvhEdckg_PbAEr-PJ",
+    { auth: { storageKey: "baggle_dashboard_session_v1", persistSession: true, autoRefreshToken: true, detectSessionInUrl: false } }
+  );
 
-    function el(tag, cls, text) {
-      const n = document.createElement(tag);
-      if (cls) n.className = cls;
-      if (text != null) n.textContent = text;
-      return n;
-    }
-    function safeUrl(u) { return /^https?:\/\//i.test(u || "") ? u : null; }
-    function bg(node, url) {
-      const ok = safeUrl(url);
-      if (ok) node.style.backgroundImage = "url(" + JSON.stringify(ok) + ")";
-    }
+  const $ = (id) => document.getElementById(id);
+  const views = { login: $("viewLogin"), signup: $("viewSignup"), session: $("viewSession") };
+  function show(name) {
+    Object.keys(views).forEach((k) => { views[k].hidden = k !== name; });
+    const first = views[name].querySelector("input");
+    if (first && name !== "session") first.focus();
+  }
+  function setStatus(el, msg, isError) {
+    el.textContent = msg || "";
+    el.classList.toggle("error", !!isError);
+  }
 
-    function bagTile(b) {
-      const tile = el("button", "bag-tile");
-      tile.type = "button";
-      const photos = (b.photos || []).filter(safeUrl).slice(0, 4);
-      const collage = el("div", "bag-collage" + (photos.length <= 1 ? " one" : photos.length === 2 ? " two" : ""));
-      if (photos.length === 0) collage.appendChild(el("div", "ph"));
-      photos.forEach((p) => { const ph = el("div", "ph"); bg(ph, p); collage.appendChild(ph); });
-      const meta = el("div", "bag-meta");
-      meta.appendChild(el("p", "bag-name", b.bag_name));
-      meta.appendChild(el("p", "bag-owner", "by " + b.owner_name));
-      const stats = el("div", "bag-stats");
-      const likes = el("span", null);
-      likes.appendChild(el("span", "heart", "\u2665"));
-      likes.appendChild(document.createTextNode(" " + b.like_count + " this week"));
-      stats.appendChild(likes);
-      stats.appendChild(el("span", null, b.item_count + (Number(b.item_count) === 1 ? " item" : " items")));
-      meta.appendChild(stats);
-      tile.appendChild(collage);
-      tile.appendChild(meta);
-      tile.addEventListener("click", openLock);
-      return tile;
-    }
+  $("showSignup").addEventListener("click", () => show("signup"));
+  $("showLogin").addEventListener("click", () => show("login"));
+  if (location.hash === "#signup") show("signup"); else show("login");
 
-    function acctTile(a) {
-      const tile = el("button", "acct-tile");
-      tile.type = "button";
-      const photo = el("div", "acct-photo");
-      bg(photo, a.photo);
-      const info = el("div", null);
-      info.appendChild(el("p", "acct-name", a.owner_name));
-      const bags = Number(a.bag_count), fol = Number(a.follower_count);
-      info.appendChild(el("div", "acct-stats",
-        bags + (bags === 1 ? " bag" : " bags") + " \u00b7 " + fol + (fol === 1 ? " follower" : " followers")));
-      tile.appendChild(photo);
-      tile.appendChild(info);
-      tile.addEventListener("click", openLock);
-      return tile;
+  // Already logged in? Offer a way back into the dashboard instead of the form.
+  baggleSupabase.auth.getSession().then(({ data }) => {
+    if (data && data.session) {
+      $("sessionEmail").textContent = data.session.user.email || "";
+      show("session");
     }
+  }).catch(() => {});
 
-    (async function load() {
-      try {
-        const [hot, acc] = await Promise.all([
-          baggleSupabase.rpc("get_hot_bags", { max_rows: 8 }),
-          baggleSupabase.rpc("get_suggested_accounts", { max_rows: 6 })
-        ]);
-        if (hot.error || acc.error) { console.warn("Discovery unavailable", hot.error || acc.error); return; }
-        const bags = hot.data || [], accts = acc.data || [];
-        const hotEl = document.getElementById("hotBags"), acctEl = document.getElementById("suggestedAccounts");
-        bags.forEach((b) => hotEl.appendChild(bagTile(b)));
-        accts.forEach((a) => acctEl.appendChild(acctTile(a)));
-        document.getElementById("hotBlock").hidden = bags.length === 0;
-        document.getElementById("acctBlock").hidden = accts.length === 0;
-        document.getElementById("discoverEmpty").hidden = bags.length + accts.length > 0;
-        section.hidden = false;
-      } catch (err) { console.warn("Discovery unavailable", err); }
-    })();
-  })();
+  $("logoutBtn").addEventListener("click", async () => {
+    try { await baggleSupabase.auth.signOut(); } catch (e) { console.error(e); }
+    show("login");
+  });
+
+  // ---- log in ----
+  $("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const status = $("loginStatus"), btn = $("loginBtn");
+    const email = $("loginEmail").value.trim(), password = $("loginPassword").value;
+    setStatus(status, "");
+    if (!email || !password) { setStatus(status, "Enter your email and password.", true); return; }
+    btn.disabled = true; const label = btn.textContent; btn.textContent = "Logging in…";
+    try {
+      const { error } = await baggleSupabase.auth.signInWithPassword({ email, password });
+      if (error) { setStatus(status, error.message, true); return; }
+      window.location.href = "/dashboard/";
+    } catch (err) {
+      console.error(err);
+      setStatus(status, "Something went wrong. Check your connection and try again.", true);
+    } finally {
+      btn.disabled = false; btn.textContent = label;
+    }
+  });
+
+  // ---- forgot password (same email + redirect the dashboard uses) ----
+  $("forgotBtn").addEventListener("click", async () => {
+    const status = $("loginStatus");
+    const email = $("loginEmail").value.trim();
+    if (!email) { setStatus(status, "Type your email above first, then tap Forgot password.", true); return; }
+    try {
+      const { error } = await baggleSupabase.auth.resetPasswordForEmail(email, {
+        redirectTo: "https://baggle.net/dashboard/reset-password.html"
+      });
+      if (error) { setStatus(status, error.message, true); return; }
+      setStatus(status, "If that email has an account, a reset link is on its way.");
+    } catch (err) {
+      console.error(err);
+      setStatus(status, "Something went wrong. Check your connection and try again.", true);
+    }
+  });
+
+  // ---- sign up ----
+  $("signupForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const status = $("signupStatus"), btn = $("signupBtn");
+    const first = $("signupFirst").value.trim(), last = $("signupLast").value.trim();
+    const email = $("signupEmail").value.trim(), password = $("signupPassword").value;
+    setStatus(status, "");
+    if (!first || !last) { setStatus(status, "Enter your first and last name.", true); return; }
+    if (!email) { setStatus(status, "Enter your email address.", true); return; }
+    if (password.length < 6) { setStatus(status, "Password must be at least 6 characters.", true); return; }
+    btn.disabled = true; const label = btn.textContent; btn.textContent = "Signing up…";
+    try {
+      const { data, error } = await baggleSupabase.auth.signUp({
+        email, password,
+        options: {
+          data: { first_name: first, last_name: last, full_name: first + " " + last },
+          emailRedirectTo: "https://baggle.net/dashboard/"
+        }
+      });
+      if (error) { setStatus(status, error.message, true); return; }
+      if (data.session) { window.location.href = "/dashboard/"; return; }
+      $("signupForm").reset();
+      setStatus(status, "Check your email to confirm your account, then log in.");
+    } catch (err) {
+      console.error(err);
+      setStatus(status, "Something went wrong. Check your connection and try again.", true);
+    } finally {
+      btn.disabled = false; btn.textContent = label;
+    }
+  });
 </script>
 </body>
 </html>

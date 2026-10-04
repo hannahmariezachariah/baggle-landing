@@ -1,0 +1,92 @@
+/* Baggle public site: shared styles for the home page and the For You page */
+:root{
+  --black:#111111;
+  --white:#FFFFFF;
+  --cream:#F7F4EF;
+  --card:#FFFDF8;
+  --stone:#6E6A63;
+  --stone-light:#A39D91;
+  --line:#E4DFD6;
+  --purple:#3D2A5C;
+  --purple-dark:#2C1D44;
+  --pink:#FF5C8A;
+  --pink-soft:#FCEAF0;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color:var(--black);
+  background:var(--white);
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  min-height:100dvh;
+  display:flex;
+  flex-direction:column;
+}
+a{text-decoration:none;color:inherit;}
+button{font-family:inherit;}
+
+/* ---------- header ---------- */
+.site-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 32px;
+  border-bottom:1px solid var(--line);
+  background:var(--white);
+}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand-bag{width:26px;height:24px;flex:0 0 auto;}
+.wordmark{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:1.65rem;font-weight:700;letter-spacing:0.01em;color:var(--black);
+}
+.site-nav{display:flex;align-items:center;gap:8px;}
+.nav-tab{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:9px 16px;border-radius:999px;
+  font-size:0.9rem;font-weight:600;color:var(--black);
+  transition:background .15s ease,color .15s ease;
+}
+.nav-tab svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;}
+.nav-tab:hover{background:var(--cream);}
+.nav-tab.active{background:var(--purple);color:var(--white);}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:100%;padding:13px 20px;
+  font-size:0.92rem;font-weight:700;letter-spacing:0.01em;
+  border-radius:999px;cursor:pointer;
+  border:1.5px solid var(--purple);
+  transition:background .15s ease,color .15s ease,opacity .15s ease;
+}
+.btn-solid{background:var(--purple);color:var(--white);}
+.btn-solid:hover{background:var(--purple-dark);border-color:var(--purple-dark);}
+.btn-solid:disabled{opacity:.6;cursor:default;}
+.btn-outline{background:transparent;color:var(--purple);}
+.btn-outline:hover{background:var(--purple);color:var(--white);}
+
+/* ---------- footer ---------- */
+.mini-foot{
+  padding:16px 32px;text-align:center;
+  font-size:0.8rem;color:var(--stone-light);
+}
+.mini-foot a{color:var(--stone);}
+.mini-foot a:hover{color:var(--black);}
+
+/* ---------- login-prompt modal (For You page) ---------- */
+.lock-backdrop{position:fixed;inset:0;background:rgba(17,17,17,.45);display:flex;align-items:center;justify-content:center;z-index:200;padding:20px;}
+.lock-backdrop[hidden]{display:none;}
+.lock-modal{position:relative;background:var(--white);border-radius:16px;max-width:380px;width:100%;padding:34px 26px 28px;text-align:center;}
+.lock-modal h3{font-family:Georgia,"Times New Roman",serif;font-size:1.3rem;margin:0 0 8px;}
+.lock-modal p{color:var(--stone);font-size:0.92rem;line-height:1.5;margin:0 0 20px;}
+.lock-actions{display:flex;gap:10px;justify-content:center;}
+.lock-actions .btn{width:auto;flex:1;}
+.lock-x{position:absolute;top:10px;right:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:none;border:0;border-radius:50%;cursor:pointer;color:var(--stone);}
+.lock-x:hover{background:var(--cream);color:var(--black);}
+.lock-x svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;}
+
+@media (max-width:560px){
+  .site-header{padding:14px 18px;}
+  .wordmark{font-size:1.45rem;}
+}
