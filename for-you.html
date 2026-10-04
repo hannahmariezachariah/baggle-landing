@@ -12,12 +12,35 @@
 <link rel="stylesheet" href="/site.css">
 <style>
   .foryou{flex:1;width:100%;max-width:1120px;margin:0 auto;padding:32px 32px 24px;}
-  .block{margin-bottom:40px;}
+  .block{margin-bottom:28px;}
   .block h2{font-family:Georgia,"Times New Roman",serif;font-size:1.5rem;margin:0 0 4px;}
-  .block .sub{margin:0 0 18px;color:var(--stone);font-size:0.9rem;}
+  .block .sub{margin:0 0 14px;color:var(--stone);font-size:0.9rem;}
   .empty{color:var(--stone);font-size:0.95rem;margin:0 0 40px;}
-  .bag-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;}
-  .acct-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;}
+  /* one row per section, with < > buttons to move across */
+  .carousel{position:relative;}
+  .track{
+    display:flex;gap:18px;
+    overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
+    scrollbar-width:none;padding:2px 0 6px;
+  }
+  .track::-webkit-scrollbar{display:none;}
+  .track > *{scroll-snap-align:start;flex:0 0 calc((100% - 54px) / 4);min-width:200px;}
+  .track.accts{gap:14px;}
+  .track.accts > *{flex-basis:calc((100% - 42px) / 4);min-width:210px;}
+  .arrow{
+    position:absolute;top:50%;transform:translateY(-50%);z-index:5;
+    width:38px;height:38px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--white);border:1px solid var(--line);color:var(--purple);
+    box-shadow:0 4px 14px rgba(17,17,17,.12);cursor:pointer;
+    transition:background .15s ease,color .15s ease,opacity .15s ease;
+  }
+  .arrow:hover{background:var(--purple);color:var(--white);border-color:var(--purple);}
+  .arrow svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;}
+  .arrow.prev{left:-19px;}
+  .arrow.next{right:-19px;}
+  .arrow[hidden]{display:none;}
+  @media (max-width:560px){ .arrow{display:none;} .track > *{flex-basis:72%;min-width:0;} .track.accts > *{flex-basis:72%;min-width:0;} }
   .bag-tile,.acct-tile{
     text-align:left;font-family:inherit;color:var(--black);cursor:pointer;
     background:var(--white);border:1px solid var(--line);border-radius:14px;padding:0;overflow:hidden;
@@ -64,12 +87,20 @@
     <section class="block" id="hotBlock">
       <h2>Hot bags this week</h2>
       <p class="sub">The most-loved bags from public Baggle accounts.</p>
-      <div class="bag-grid" id="hotBags"></div>
+      <div class="carousel" id="hotCarousel">
+        <button type="button" class="arrow prev" aria-label="Previous bags" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="track" id="hotBags"></div>
+        <button type="button" class="arrow next" aria-label="More bags" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
     </section>
     <section class="block" id="acctBlock">
       <h2>Suggested accounts</h2>
       <p class="sub">Public accounts worth following.</p>
-      <div class="acct-grid" id="suggestedAccounts"></div>
+      <div class="carousel" id="acctCarousel">
+        <button type="button" class="arrow prev" aria-label="Previous accounts" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="track accts" id="suggestedAccounts"></div>
+        <button type="button" class="arrow next" aria-label="More accounts" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
     </section>
   </div>
   <p class="empty" id="emptyMsg" hidden>No public bags yet. Set your account to public from your dashboard and your bags can show up here.</p>
@@ -164,12 +195,29 @@
       return tile;
     }
 
+    // < > buttons: scroll one "page" of tiles; hide a button when there is nothing more that way.
+    function wireCarousel(root) {
+      const track = root.querySelector(".track");
+      const prev = root.querySelector(".arrow.prev"), next = root.querySelector(".arrow.next");
+      function update() {
+        const max = track.scrollWidth - track.clientWidth;
+        prev.hidden = track.scrollLeft <= 2;
+        next.hidden = track.scrollLeft >= max - 2;
+      }
+      prev.addEventListener("click", () => track.scrollBy({ left: -track.clientWidth * 0.9, behavior: "smooth" }));
+      next.addEventListener("click", () => track.scrollBy({ left: track.clientWidth * 0.9, behavior: "smooth" }));
+      track.addEventListener("scroll", update, { passive: true });
+      window.addEventListener("resize", update);
+      update();
+      return update;
+    }
+
     (async function load() {
       const loading = document.getElementById("loadingMsg");
       try {
         const [hot, acc] = await Promise.all([
-          baggleSupabase.rpc("get_hot_bags", { max_rows: 8 }),
-          baggleSupabase.rpc("get_suggested_accounts", { max_rows: 6 })
+          baggleSupabase.rpc("get_hot_bags", { max_rows: 12 }),
+          baggleSupabase.rpc("get_suggested_accounts", { max_rows: 12 })
         ]);
         loading.hidden = true;
         if (hot.error || acc.error) {
@@ -187,6 +235,8 @@
           document.getElementById("emptyMsg").hidden = false;
         } else {
           document.getElementById("content").hidden = false;
+          wireCarousel(document.getElementById("hotCarousel"));
+          wireCarousel(document.getElementById("acctCarousel"));
         }
       } catch (err) {
         console.warn("Discovery unavailable", err);
