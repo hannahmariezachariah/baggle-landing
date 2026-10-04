@@ -53,6 +53,16 @@ button{font-family:inherit;}
 .header-search:hover{border-color:var(--purple);}
 .header-search svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;flex:0 0 auto;}
 .header-search span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.nav-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 22px;border-radius:999px;
+  background:var(--purple);color:var(--white);
+  border:1.5px solid var(--purple);
+  font-size:0.92rem;font-weight:700;letter-spacing:0.01em;
+  transition:background .15s ease;
+}
+.nav-btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;flex:0 0 auto;}
+.nav-btn:hover{background:var(--purple-dark);border-color:var(--purple-dark);}
 .nav-tab{
   display:inline-flex;align-items:center;gap:8px;
   padding:9px 16px;border-radius:999px;
