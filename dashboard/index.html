@@ -182,6 +182,20 @@
         <div class="people-list" id="forYouPeopleList"></div>
       </div>
 
+      <div class="picks-section" id="forYouPicks" hidden>
+        <div class="picks-head">
+          <h2 class="people-heading" id="picksHeading">Picked for you</h2>
+          <button class="link-btn" id="tuneForYouBtn" type="button">Tune your For You</button>
+        </div>
+        <p class="picks-sub" id="picksSub"></p>
+        <div class="items-grid picks-grid" id="picksGrid">
+          <!-- ranked item cards rendered by dashboard.js -->
+        </div>
+        <button class="btn-pill picks-more" id="picksMoreBtn" type="button" hidden>Show more</button>
+      </div>
+
+      <h2 class="people-heading all-bags-heading" id="allBagsHeading" hidden>Explore public bags</h2>
+
       <div class="bags-grid" id="forYouGrid">
         <!-- public bag cards rendered by dashboard.js -->
       </div>
@@ -275,6 +289,24 @@
     <div class="modal-actions">
       <button class="btn-pill" id="cropCancelBtn">Cancel</button>
       <button class="btn-pill solid" id="cropSaveBtn">Use photo</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ tune For You (interests + personalisation switch) ============ -->
+<div class="modal-backdrop" id="interestsBackdrop" hidden>
+  <div class="modal interests-modal">
+    <h3>What are you into?</h3>
+    <p class="modal-hint">Pick a few and your For You page starts with things you'll like. Only you can see your choices.</p>
+    <div class="interest-chips" id="interestChips"></div>
+    <label class="check-row">
+      <input type="checkbox" id="personaliseToggle" checked>
+      <span>Personalise my For You page using what I do in Baggle (items I save, bags I follow and like) and the interests above. Nothing from other apps or websites is used. Untick to switch it all off.</span>
+    </label>
+    <p class="modal-error" id="interestsError"></p>
+    <div class="modal-actions">
+      <button class="btn-pill" id="interestsSkipBtn" type="button">Not now</button>
+      <button class="btn-pill solid" id="interestsSaveBtn" type="button">Save</button>
     </div>
   </div>
 </div>
