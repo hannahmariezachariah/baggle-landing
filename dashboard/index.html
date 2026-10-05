@@ -109,8 +109,8 @@
             </div>
             <div class="profile-stats" id="profileStats" aria-live="polite">
               <span><strong id="statBags">0</strong> <span id="statBagsLabel">bags</span></span>
-              <span><strong id="statFollowers">–</strong> <span id="statFollowersLabel">followers</span></span>
-              <span><strong id="statFollowing">–</strong> following</span>
+              <button type="button" class="stat-btn" data-people-list="followers"><strong id="statFollowers">–</strong> <span id="statFollowersLabel">followers</span></button>
+              <button type="button" class="stat-btn" data-people-list="following"><strong id="statFollowing">–</strong> following</button>
             </div>
           </div>
         </div>
@@ -280,8 +280,8 @@
             <div class="profile-stats" id="personStats" aria-live="polite">
               <span id="personSub"></span>
               <span class="person-stat" hidden><strong id="personStatBags">0</strong> <span id="personStatBagsLabel">bags</span></span>
-              <span class="person-stat" hidden><strong id="personStatFollowers">–</strong> <span id="personStatFollowersLabel">followers</span></span>
-              <span class="person-stat" hidden><strong id="personStatFollowing">–</strong> following</span>
+              <button type="button" class="person-stat stat-btn" data-people-list="followers" hidden><strong id="personStatFollowers">–</strong> <span id="personStatFollowersLabel">followers</span></button>
+              <button type="button" class="person-stat stat-btn" data-people-list="following" hidden><strong id="personStatFollowing">–</strong> following</button>
             </div>
           </div>
         </div>
@@ -393,6 +393,19 @@
     <p class="modal-error" id="moveItemError"></p>
     <div class="modal-actions">
       <button class="btn-pill full" id="moveItemCancelBtn">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ followers / following list ============ -->
+<div class="modal-backdrop" id="peopleListBackdrop" hidden>
+  <div class="modal people-modal">
+    <h3 id="peopleListTitle">Followers</h3>
+    <div class="people-modal-list" id="peopleListBody">
+      <!-- people rendered by dashboard.js -->
+    </div>
+    <div class="modal-actions">
+      <button class="btn-pill full" id="peopleListCloseBtn" type="button">Close</button>
     </div>
   </div>
 </div>
