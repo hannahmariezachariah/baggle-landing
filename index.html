@@ -74,6 +74,8 @@
     font-size:0.88rem;font-weight:600;color:var(--purple);text-align:center;
   }
   .card-link:hover{text-decoration:underline;}
+  .legal-line{font-size:0.76rem;color:var(--stone-light);text-align:center;margin:16px 0 0;line-height:1.55;}
+  .legal-line a{color:var(--stone);text-decoration:underline;}
   .divider{height:1px;background:var(--line);margin:20px 0;}
   .swap-line{text-align:center;font-size:0.88rem;color:var(--stone);margin:16px 0 0;}
   .swap-line button{background:none;border:0;padding:0;cursor:pointer;font-size:inherit;font-weight:700;color:var(--purple);}
@@ -141,6 +143,7 @@
       <button type="button" class="card-link" id="forgotBtn">Forgot password?</button>
       <div class="divider"></div>
       <button type="button" class="btn btn-outline" id="showSignup">Create new account</button>
+      <p class="legal-line">By continuing you agree to our <a href="/terms.html" target="_blank" rel="noopener">Terms</a> and <a href="/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</p>
     </div>
 
     <!-- sign up -->
@@ -153,10 +156,11 @@
           <input type="text" id="signupLast" placeholder="Last name" autocomplete="family-name" required>
         </div>
         <input type="email" id="signupEmail" placeholder="Email address" autocomplete="email" required>
-        <input type="password" id="signupPassword" placeholder="Password (at least 6 characters)" autocomplete="new-password" minlength="6" required>
+        <input type="password" id="signupPassword" placeholder="Password (at least 8 characters)" autocomplete="new-password" minlength="8" required>
         <button type="submit" class="btn btn-solid" id="signupBtn">Sign up</button>
       </form>
       <div class="status" id="signupStatus"></div>
+      <p class="legal-line">By signing up you agree to our <a href="/terms.html" target="_blank" rel="noopener">Terms</a> and <a href="/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</p>
       <p class="swap-line">Already have an account? <button type="button" id="showLogin">Log in</button></p>
     </div>
 

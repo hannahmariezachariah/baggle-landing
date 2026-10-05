@@ -83,7 +83,7 @@
     setStatus(status, "");
     if (!first || !last) { setStatus(status, "Enter your first and last name.", true); return; }
     if (!email) { setStatus(status, "Enter your email address.", true); return; }
-    if (password.length < 6) { setStatus(status, "Password must be at least 6 characters.", true); return; }
+    if (password.length < 8) { setStatus(status, "Password must be at least 8 characters.", true); return; }
     btn.disabled = true; const label = btn.textContent; btn.textContent = "Signing up…";
     try {
       const { data, error } = await baggleSupabase.auth.signUp({
