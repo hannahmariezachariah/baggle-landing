@@ -244,15 +244,20 @@
         All bags
       </button>
       <div class="shared-head">
-        <div class="shared-title-row">
-          <h1 class="dash-title" id="sharedBagTitle">—</h1>
+        <div class="shared-id">
+          <span class="shared-avatar" id="sharedOwnerAvatar"></span>
+          <div class="shared-id-text">
+            <h1 class="dash-title" id="sharedBagTitle">—</h1>
+            <div class="shared-by-label" id="sharedByLabel"></div>
+          </div>
+        </div>
+        <div class="shared-actions">
           <button class="btn-pill solid" id="followToggleBtn" hidden>Follow</button>
           <button class="like-btn" id="sharedLikeBtn" hidden title="Like" aria-label="Like">
             <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.35-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 5c-2.5 4.65-9.5 9-9.5 9Z"/></svg>
             <span class="like-count">0</span>
           </button>
         </div>
-        <div class="shared-by-label" id="sharedByLabel"></div>
       </div>
 
       <div class="empty-items" id="sharedUnavailable" hidden></div>
