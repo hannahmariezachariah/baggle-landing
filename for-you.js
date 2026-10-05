@@ -61,9 +61,13 @@
     function acctTile(a) {
       const tile = el("button", "acct-tile");
       tile.type = "button";
-      // Logged-out pages never show anyone's profile picture (the privacy
-      // policy promises this), so the circle shows initials instead.
-      const photo = el("div", "acct-photo", initials(a.owner_name));
+      // Public accounts only (the function never returns private ones). The
+      // picture must be one of Baggle's own stored profile pictures; otherwise
+      // the circle shows initials.
+      const avatarOk = typeof a.avatar_url === "string" &&
+        a.avatar_url.indexOf("https://wndqubtncxtbninmojpx.supabase.co/storage/v1/object/public/avatars/") === 0;
+      const photo = el("div", "acct-photo" + (avatarOk ? " has-img" : ""), avatarOk ? "" : initials(a.owner_name));
+      if (avatarOk) bg(photo, a.avatar_url);
       const info = el("div", null);
       info.appendChild(el("p", "acct-name", a.owner_name));
       const bags = Number(a.bag_count), fol = Number(a.follower_count);
