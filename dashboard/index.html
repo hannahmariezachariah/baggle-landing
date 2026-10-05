@@ -277,7 +277,12 @@
           <div id="personAvatar" class="mini-avatar profile-avatar" role="img"></div>
           <div class="profile-head">
             <h1 class="dash-title" id="personName">&mdash;</h1>
-            <div class="profile-stats"><span id="personSub"></span></div>
+            <div class="profile-stats" id="personStats" aria-live="polite">
+              <span id="personSub"></span>
+              <span class="person-stat" hidden><strong id="personStatBags">0</strong> <span id="personStatBagsLabel">bags</span></span>
+              <span class="person-stat" hidden><strong id="personStatFollowers">–</strong> <span id="personStatFollowersLabel">followers</span></span>
+              <span class="person-stat" hidden><strong id="personStatFollowing">–</strong> following</span>
+            </div>
           </div>
         </div>
       </div>
