@@ -243,6 +243,27 @@
       </div>
     </section>
 
+    <!-- ---- PERSON VIEW: someone's profile, opened from people search ---- -->
+    <section class="view" id="view-person">
+      <button class="back-btn show" id="personBackBtn" type="button">
+        <svg viewBox="0 0 24 24"><path d="M15 5 8 12l7 7"/></svg>
+        For You
+      </button>
+      <div class="dash-header">
+        <div class="profile-top">
+          <div id="personAvatar" class="mini-avatar profile-avatar" role="img"></div>
+          <div class="profile-head">
+            <h1 class="dash-title" id="personName">&mdash;</h1>
+            <div class="profile-stats"><span id="personSub"></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="empty-items" id="personEmpty" hidden></div>
+      <div class="bags-grid" id="personGrid">
+        <!-- this person's public bag cards rendered by dashboard.js -->
+      </div>
+    </section>
+
   </main>
 </div>
 

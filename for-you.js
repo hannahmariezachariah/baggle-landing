@@ -52,11 +52,18 @@
       return tile;
     }
 
+    function initials(name) {
+      const parts = String(name || "").trim().split(" ").filter(Boolean);
+      if (parts.length === 0) return "?";
+      return (parts[0][0] + (parts.length > 1 ? parts[parts.length - 1][0] : "")).toUpperCase();
+    }
+
     function acctTile(a) {
       const tile = el("button", "acct-tile");
       tile.type = "button";
-      const photo = el("div", "acct-photo");
-      bg(photo, a.photo);
+      // Logged-out pages never show anyone's profile picture (the privacy
+      // policy promises this), so the circle shows initials instead.
+      const photo = el("div", "acct-photo", initials(a.owner_name));
       const info = el("div", null);
       info.appendChild(el("p", "acct-name", a.owner_name));
       const bags = Number(a.bag_count), fol = Number(a.follower_count);
