@@ -100,7 +100,7 @@ button{font-family:inherit;}
 .lock-backdrop{position:fixed;inset:0;background:rgba(17,17,17,.45);display:flex;align-items:center;justify-content:center;z-index:200;padding:20px;}
 .lock-backdrop[hidden]{display:none;}
 .lock-modal{position:relative;background:var(--white);border-radius:16px;max-width:380px;width:100%;padding:34px 26px 28px;text-align:center;}
-.lock-modal h3{font-family:Georgia,"Times New Roman",serif;font-size:1.3rem;margin:0 0 8px;}
+.lock-modal h3{font-family:inherit;font-weight:700;letter-spacing:-.01em;font-size:1.25rem;margin:0 0 8px;}
 .lock-modal p{color:var(--stone);font-size:0.92rem;line-height:1.5;margin:0 0 20px;}
 .lock-actions{display:flex;gap:10px;justify-content:center;}
 .lock-actions .btn{width:auto;flex:1;}
