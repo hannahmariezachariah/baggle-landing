@@ -21,14 +21,13 @@
   /* one row per section, with < > buttons to move across */
   .carousel{position:relative;}
   .track{
-    display:flex;gap:18px;
+    display:flex;gap:0;
     overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
     scrollbar-width:none;padding:2px 0 6px;
   }
   .track::-webkit-scrollbar{display:none;}
-  .track > *{scroll-snap-align:start;flex:0 0 calc((100% - 54px) / 4);min-width:200px;}
-  .track.accts{gap:14px;}
-  .track.accts > *{flex-basis:calc((100% - 42px) / 4);min-width:210px;}
+  .track > *{scroll-snap-align:start;flex:0 0 25%;min-width:200px;}
+  .track.accts > *{flex-basis:25%;min-width:210px;}
   .arrow{
     position:absolute;top:50%;transform:translateY(-50%);z-index:5;
     width:38px;height:38px;border-radius:50%;
@@ -45,10 +44,10 @@
   @media (max-width:560px){ .arrow{display:none;} .track > *{flex-basis:72%;min-width:0;} .track.accts > *{flex-basis:72%;min-width:0;} }
   .bag-tile,.acct-tile{
     text-align:left;font-family:inherit;color:var(--black);cursor:pointer;
-    background:var(--white);border:1px solid var(--line);border-radius:14px;padding:0;overflow:hidden;
-    transition:box-shadow .15s ease,transform .15s ease;
+    background:var(--white);border:none;border-radius:0;padding:0;overflow:hidden;position:relative;
   }
-  .bag-tile:hover,.acct-tile:hover{box-shadow:0 6px 20px rgba(17,17,17,.08);transform:translateY(-2px);}
+  .bag-tile::after,.acct-tile::after{content:"";position:absolute;inset:0;border:1px solid var(--line);pointer-events:none;}
+  .bag-tile:hover::after,.acct-tile:hover::after{border-color:var(--stone-light,#A39D91);}
   .bag-collage{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;height:170px;background:var(--line);}
   .bag-collage .ph{background:var(--cream) center/cover no-repeat;}
   .bag-collage.one{grid-template-columns:1fr;grid-template-rows:1fr;}

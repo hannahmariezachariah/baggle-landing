@@ -130,7 +130,6 @@
             All bags
           </button>
           <h1 class="dash-title" id="bagTitle">—</h1>
-          <span class="item-count-pill" id="bagCountPill">0 items</span>
         </div>
         <div class="dash-actions">
           <label class="checkbox-row bag-private-toggle" id="bagPrivateRow" hidden>
@@ -240,23 +239,20 @@
 
     <!-- ---- SHARED BAG VIEW (read-only, opened via a share link) ---- -->
     <section class="view" id="view-shared">
-      <div class="dash-header">
-        <div class="dash-title-row">
-          <button class="back-btn show" id="sharedBackBtn">
-            <svg viewBox="0 0 24 24"><path d="M15 5 8 12l7 7"/></svg>
-            All bags
-          </button>
+      <button class="back-btn show" id="sharedBackBtn" type="button">
+        <svg viewBox="0 0 24 24"><path d="M15 5 8 12l7 7"/></svg>
+        All bags
+      </button>
+      <div class="shared-head">
+        <div class="shared-title-row">
           <h1 class="dash-title" id="sharedBagTitle">—</h1>
-          <span class="item-count-pill" id="sharedCountPill">0 items</span>
-        </div>
-        <div class="dash-actions">
-          <span class="shared-by-label" id="sharedByLabel"></span>
+          <button class="btn-pill solid" id="followToggleBtn" hidden>Follow</button>
           <button class="like-btn" id="sharedLikeBtn" hidden title="Like" aria-label="Like">
             <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.35-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 5c-2.5 4.65-9.5 9-9.5 9Z"/></svg>
             <span class="like-count">0</span>
           </button>
-          <button class="btn-pill solid" id="followToggleBtn" hidden>Follow</button>
         </div>
+        <div class="shared-by-label" id="sharedByLabel"></div>
       </div>
 
       <div class="empty-items" id="sharedUnavailable" hidden></div>
