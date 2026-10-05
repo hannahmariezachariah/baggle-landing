@@ -71,8 +71,10 @@
       const info = el("div", null);
       info.appendChild(el("p", "acct-name", a.owner_name));
       const bags = Number(a.bag_count), fol = Number(a.follower_count);
-      info.appendChild(el("div", "acct-stats",
-        bags + (bags === 1 ? " bag" : " bags") + " · " + fol + (fol === 1 ? " follower" : " followers")));
+      // a.is_public is undefined until the database function is updated: treat that as public
+      info.appendChild(el("div", "acct-stats", a.is_public === false
+        ? "Private account"
+        : bags + (bags === 1 ? " bag" : " bags") + " · " + fol + (fol === 1 ? " follower" : " followers")));
       tile.appendChild(photo);
       tile.appendChild(info);
       tile.addEventListener("click", openLock);
