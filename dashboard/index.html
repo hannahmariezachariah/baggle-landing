@@ -207,9 +207,17 @@
       </div>
 
       <div id="forYouBrowse">
+        <div class="row-block picks-section" id="followedActivityBlock" hidden>
+          <div class="row-head"><h2 class="row-title">From people you follow</h2></div>
+          <p class="followed-activity-sub" id="followedActivitySub"></p>
+          <div class="items-grid picks-grid" id="followedActivityGrid">
+            <!-- newest items from followed accounts, rendered by dashboard.js -->
+          </div>
+        </div>
+
         <div class="row-block" id="followingRowBlock" hidden>
           <div class="row-head">
-            <h2 class="row-title">Following</h2>
+            <h2 class="row-title">Bags you follow</h2>
             <button type="button" class="link-btn" id="followingSeeAllBtn">See all</button>
           </div>
           <div class="h-row-wrap"><div class="h-row" id="followingRow"></div></div>
@@ -306,8 +314,7 @@
               <button type="button" class="person-stat stat-btn" data-people-list="following" hidden><strong id="personStatFollowing">–</strong> following</button>
             </div>
             <div class="person-follow-row" id="personFollowRow" hidden>
-              <button type="button" class="btn-pill solid" id="personFollowBtn">Request to follow</button>
-              <button type="button" class="btn-pill" id="personUnfollowAllBtn" hidden>Following</button>
+              <button type="button" class="btn-pill solid" id="personFollowBtn">Follow</button>
             </div>
           </div>
         </div>
