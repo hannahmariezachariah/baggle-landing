@@ -96,6 +96,10 @@
                   <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
                   Edit profile
                 </button>
+                <button class="account-dropdown-item" id="blockedListBtn">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M6 6l12 12"/></svg>
+                  Blocked accounts
+                </button>
                 <button class="account-dropdown-item" id="logoutBtn">
                   <svg viewBox="0 0 24 24"><path d="M9 4H6a1.5 1.5 0 0 0-1.5 1.5v13A1.5 1.5 0 0 0 6 20h3"/><path d="M14 16.5 19 12l-5-4.5"/><path d="M19 12H9"/></svg>
                   Log out
@@ -279,7 +283,22 @@
         <div class="profile-top">
           <div id="personAvatar" class="mini-avatar profile-avatar" role="img"></div>
           <div class="profile-head">
-            <h1 class="dash-title" id="personName">&mdash;</h1>
+            <div class="profile-name-row">
+              <h1 class="dash-title" id="personName">&mdash;</h1>
+              <div class="account-menu" id="personMenuWrap" hidden>
+                <div class="account-dropdown" id="personMenu" hidden>
+                  <button class="account-dropdown-item" id="personReportBtn" type="button">
+                    <svg viewBox="0 0 24 24"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg>
+                    Report
+                  </button>
+                  <button class="account-dropdown-item danger" id="personBlockBtn" type="button">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M6 6l12 12"/></svg>
+                    Block
+                  </button>
+                </div>
+                <button class="more-btn" id="personMenuBtn" type="button" title="More" aria-label="More options" aria-haspopup="true" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+              </div>
+            </div>
             <div class="profile-stats" id="personStats" aria-live="polite">
               <span id="personSub"></span>
               <span class="person-stat" hidden><strong id="personStatBags">0</strong> <span id="personStatBagsLabel">bags</span></span>
@@ -288,6 +307,7 @@
             </div>
             <div class="person-follow-row" id="personFollowRow" hidden>
               <button type="button" class="btn-pill solid" id="personFollowBtn">Request to follow</button>
+              <button type="button" class="btn-pill" id="personUnfollowAllBtn" hidden>Unfollow all bags</button>
             </div>
           </div>
         </div>
@@ -402,6 +422,41 @@
     <p class="modal-error" id="moveItemError"></p>
     <div class="modal-actions">
       <button class="btn-pill full" id="moveItemCancelBtn">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ report an account ============ -->
+<div class="modal-backdrop" id="reportBackdrop" hidden>
+  <div class="modal">
+    <h3 id="reportTitle">Report this account</h3>
+    <p class="modal-hint">Tell us what's wrong. We'll review it. They won't be told it was you.</p>
+    <div class="report-reasons" id="reportReasons" role="radiogroup" aria-label="Reason for report">
+      <label class="checkbox-row"><input type="radio" name="reportReason" value="spam"><span>Spam or ads</span></label>
+      <label class="checkbox-row"><input type="radio" name="reportReason" value="fake"><span>Fake or pretending to be someone</span></label>
+      <label class="checkbox-row"><input type="radio" name="reportReason" value="inappropriate"><span>Inappropriate content</span></label>
+      <label class="checkbox-row"><input type="radio" name="reportReason" value="harassment"><span>Harassment or bullying</span></label>
+      <label class="checkbox-row"><input type="radio" name="reportReason" value="other"><span>Something else</span></label>
+    </div>
+    <label class="field-label" for="reportNote">Anything else we should know? (optional)</label>
+    <textarea id="reportNote" class="field-input report-note" maxlength="500" rows="3"></textarea>
+    <label class="checkbox-row report-block-row"><input type="checkbox" id="reportAlsoBlock"><span>Also block this account</span></label>
+    <p class="modal-error" id="reportError"></p>
+    <div class="modal-actions">
+      <button class="btn-pill" id="reportCancelBtn" type="button">Cancel</button>
+      <button class="btn-pill solid" id="reportSubmitBtn" type="button">Send report</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ blocked accounts ============ -->
+<div class="modal-backdrop" id="blockedBackdrop" hidden>
+  <div class="modal people-modal">
+    <h3>Blocked accounts</h3>
+    <p class="modal-hint">Blocked accounts can't see your profile or bags and can't follow you. They aren't told. Unblock to let them find you again.</p>
+    <div class="people-modal-list" id="blockedBody"></div>
+    <div class="modal-actions">
+      <button class="btn-pill full" id="blockedCloseBtn" type="button">Close</button>
     </div>
   </div>
 </div>
