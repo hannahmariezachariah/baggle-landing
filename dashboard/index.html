@@ -65,6 +65,7 @@
       <button class="side-btn" data-nav="notifications" title="Alerts">
         <svg viewBox="0 0 24 24"><path d="M6 10.5a6 6 0 0 1 12 0c0 4 1.5 5.3 1.5 5.3H4.5S6 14.5 6 10.5Z"/><path d="M10 19a2.2 2.2 0 0 0 4 0"/></svg>
         Alerts
+        <span class="nav-dot" id="alertsNavDot" hidden aria-label="New follow requests"></span>
       </button>
       <button class="side-btn" data-nav="foryou" title="For You">
         <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
@@ -154,6 +155,8 @@
           <span id="alertsCountPill" hidden></span>
         </div>
       </div>
+
+      <div class="follow-requests" id="followRequests" hidden></div>
 
       <div class="filter-tabs" id="alertsTabs" role="tablist" aria-label="Filter alerts">
         <button type="button" class="filter-tab active" data-filter="all" role="tab" aria-selected="true">All</button>
@@ -282,6 +285,9 @@
               <span class="person-stat" hidden><strong id="personStatBags">0</strong> <span id="personStatBagsLabel">bags</span></span>
               <button type="button" class="person-stat stat-btn" data-people-list="followers" hidden><strong id="personStatFollowers">–</strong> <span id="personStatFollowersLabel">followers</span></button>
               <button type="button" class="person-stat stat-btn" data-people-list="following" hidden><strong id="personStatFollowing">–</strong> following</button>
+            </div>
+            <div class="person-follow-row" id="personFollowRow" hidden>
+              <button type="button" class="btn-pill solid" id="personFollowBtn">Request to follow</button>
             </div>
           </div>
         </div>
