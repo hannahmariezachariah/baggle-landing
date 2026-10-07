@@ -149,6 +149,7 @@
       <div class="items-grid" id="itemsGrid">
         <!-- item cards rendered by dashboard.js -->
       </div>
+      <div class="comments-section" id="bagComments"></div>
     </section>
 
     <!-- ---- ALERTS VIEW ---- -->
@@ -267,6 +268,7 @@
           </div>
         </div>
         <div class="shared-actions">
+          <button class="btn-pill" id="sharedShareBtn" hidden>Share</button>
           <button class="btn-pill solid" id="followToggleBtn" hidden>Follow</button>
           <button class="like-btn" id="sharedLikeBtn" hidden title="Like" aria-label="Like">
             <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.35-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 5c-2.5 4.65-9.5 9-9.5 9Z"/></svg>
@@ -279,6 +281,7 @@
       <div class="items-grid" id="sharedItemsGrid">
         <!-- read-only item cards rendered by dashboard.js -->
       </div>
+      <div class="comments-section" id="sharedComments"></div>
     </section>
 
     <!-- ---- PERSON VIEW: someone's profile, opened from people search ---- -->
@@ -485,12 +488,20 @@
 <div class="modal-backdrop" id="shareBackdrop" hidden>
   <div class="modal">
     <h3>Share this bag</h3>
-    <p class="modal-hint">Anyone with a Baggle account can open this link and follow along.</p>
+    <p class="modal-hint" id="shareLinkHint">Anyone with a Baggle account can open this link and follow along.</p>
     <div class="share-link-row">
       <input id="shareLinkInput" class="field-input" type="text" readonly>
       <button class="btn-pill solid" id="shareCopyBtn">Copy</button>
     </div>
     <div class="share-privacy-note" id="sharePrivacyNote" hidden></div>
+    <div class="share-send" id="shareSend">
+      <h4 class="share-send-title">Send to friends on Baggle</h4>
+      <p class="modal-hint" id="shareSendHint">Pick people and they will get it in their Alerts.</p>
+      <input id="shareSearchInput" class="field-input" type="text" placeholder="Search people by name…" maxlength="60" autocomplete="off">
+      <input id="shareMessageInput" class="field-input" type="text" placeholder="Add a note (optional)" maxlength="200" autocomplete="off">
+      <div class="share-people" id="sharePeople"></div>
+      <div class="share-sentto" id="shareSentTo" hidden></div>
+    </div>
     <div class="modal-actions">
       <button class="btn-pill full" id="shareCloseBtn">Done</button>
     </div>
