@@ -65,7 +65,7 @@
       <button class="side-btn" data-nav="notifications" title="Alerts">
         <svg viewBox="0 0 24 24"><path d="M6 10.5a6 6 0 0 1 12 0c0 4 1.5 5.3 1.5 5.3H4.5S6 14.5 6 10.5Z"/><path d="M10 19a2.2 2.2 0 0 0 4 0"/></svg>
         Alerts
-        <span class="nav-dot" id="alertsNavDot" hidden aria-label="New follow requests"></span>
+        <span class="nav-dot" id="alertsNavDot" hidden aria-label="New alerts"></span>
       </button>
       <button class="side-btn" data-nav="foryou" title="For You">
         <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
@@ -366,6 +366,13 @@
         <span>Public account — let other Baggle users find and follow your bags</span>
       </label>
       <p class="field-hint">Public bags can also appear in a preview on the baggle.net homepage that anyone can see without an account (bag name, your name, your profile picture, a few photos). You can still mark individual bags private.</p>
+    </div>
+    <div class="profile-public-row">
+      <label class="checkbox-row">
+        <input type="checkbox" id="suggestionsCheckbox" checked>
+        <span>Appear in suggestions</span>
+      </label>
+      <p class="field-hint">Lets Baggle suggest your account and bags to other people (the homepage preview and the For You suggestions). Turn it off to stay out of those. People can still find you by searching your name, and your account stays public or private as you've set it.</p>
     </div>
     <label class="field-label">Backdrop</label>
     <div class="backdrop-picker" id="backdropPicker" role="radiogroup" aria-label="Backdrop colour"></div>
