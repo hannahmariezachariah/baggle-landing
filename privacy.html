@@ -2,8 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src 'none'">
-<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy Policy — Baggle</title>
 <meta name="description" content="How Baggle collects, uses, and protects your data.">
@@ -52,9 +50,7 @@
   .link-btn{font-size:0.88rem;font-weight:600;text-decoration:none;}
   main{padding:56px 0 80px;}
   h1{
-    font-family:inherit;
-    font-weight:700;
-    letter-spacing:-0.02em;
+    font-family:Georgia, "Times New Roman", serif;
     font-size:2.1rem;
     margin:0 0 6px;
   }
@@ -94,30 +90,19 @@
 
 <main class="wrap">
   <h1>Privacy Policy</h1>
-  <p class="updated">Last updated 5 October 2026</p>
+  <p class="updated">Last updated 3 October 2026</p>
 
   <p>This policy explains what Baggle ("Baggle", "we", "us") collects when you use the Baggle browser extension, the Baggle web dashboard, or baggle.net (together, the "Service"), and what we do with it. Baggle is currently pre-launch — we're still finishing the product before any public release — but we wanted this in place now because the Service already stores real account and shopping data for the people trying it.</p>
 
   <h2>What we collect</h2>
   <p><strong>Account information.</strong> When you sign up, we store your email address and password (handled by our database provider, Supabase, which never gives us your password in plain text). If you add a name in "Edit profile," we store that too.</p>
-  <p><strong>Profile picture (optional).</strong> If you upload one in "Edit profile," your browser first crops it to the part you chose and removes any camera metadata (such as location), then we store that small image with our storage provider, Supabase. It is saved at a web address that works without logging in, so anyone who has the exact link can open the image; the link is long and unguessable. Your picture is shown to other signed-in Baggle users next to your name (for example on your shared bags, in search, and to the owner of a bag you follow or like), and they can click it to enlarge it. This applies whether your account is public or private. Your display name and picture can also be seen by anyone, without an account, in the "Suggested accounts" preview on baggle.net (see "Public previews" below), whether your account is public or private. For a private account, that preview shows only the name and picture, never any bags. You can stop appearing there by deleting your account.</p>
   <p><strong>Bags and items.</strong> When you save something with the Baggle extension, we store the product's title, price, size (if you add one), the store it's from, its image, its page link, and when you saved it — organised into the "bags" you create.</p>
   <p><strong>Price and stock history.</strong> To send you price-drop and back-in-stock alerts, we periodically re-check the page link of each saved item and store the price and stock status we find.</p>
   <p><strong>Social features, if you choose to use them.</strong> Baggle lets you make your account and individual bags public, so a friend with their own Baggle account can open a share link, follow a bag, and like it. If you do this, we store: your account's public/private setting, each bag's own private setting, who follows which bag, and who's liked which bag.</p>
-  <p><strong>Following people and following bags are separate.</strong> Following a single bag means you get Alerts about that bag (for example when its owner adds something). Following a person's account means their new activity appears on your For You page. For a public account, following is instant; for a private account, the owner has to accept your request first. We store who follows which account, and whether a request is pending or accepted. People can see who follows them and who they follow, and you can unfollow at any time.</p>
-  <p><strong>Comments and sending bags.</strong> You can leave a comment on any bag you can open. A comment is shown, with your display name and picture, to everyone who can open that bag, and the bag's owner can delete it (you can delete your own at any time). For a bag that has been sent to specific people, only those people and the owner can see its comments. You can also send a bag to specific people on Baggle. They get a notification in Alerts, and if the bag is private they can open that one bag, and comment on it, until you take it back ("Unsend") or delete it. You can reply to a comment (replies are shown under it) and like comments; the person whose comment it is can see who liked it and who replied, and gets a notification. We store the text of your comments and replies, who wrote them, when, which comments you liked, and who you sent bags to and any short note you added. We limit how fast comments and sends can be made to reduce spam. If you block someone, you stop seeing each other's comments and can't send bags to each other. Deleting a comment also deletes its replies and likes. Deleting your account removes your comments, replies, likes and the bags you sent.</p>
-
-  <p><strong>Public previews on baggle.net.</strong> If you set your account to public, bags you haven't marked private can appear on the baggle.net homepage, which anyone can see without an account. That preview shows only the bag's name, your display name, how many items it holds, how many likes it got this week, a few of its item photos, and how many people follow your public bags. Accounts can also appear in a "Suggested accounts" preview, which shows your display name and your profile picture (if you added one). For a public account it also shows how many public bags and followers you have; for a private account it shows nothing else. Item titles, prices and store links are only visible to signed-in Baggle users. Set your account or a bag back to private and it stops appearing.</p>
-
-  <p><strong>Profile pages.</strong> Signed-in Baggle users can open anyone's profile page. It shows three numbers: how many bags the account has, how many followers, and how many accounts it follows. They can tap Followers or Following to see the name and picture of those accounts, a bit like Instagram. This works for private accounts too. What a profile page shows beyond that is up to each bag: only bags marked public (on a public account) can be opened by other people, and a private account's profile page shows no bags at all, unless its owner has accepted your request to follow it. On a private account, any signed-in person can send a follow request; the owner sees the requester's name and picture in their Alerts and can accept or decline. Once accepted, that person can see the owner's bags (except any bag the owner has marked private) and appears in the owner's Followers list; either side can end it at any time. You can also report an account (you choose a reason and can add a note; reports are stored so we can review them and are not shown to the person reported) and block an account: a blocked account can't see your profile or bags, can't follow you or request to follow you, and any follows between you are removed. A block is stored against your account until you remove it, and the blocked person isn't told. If you pick a backdrop colour for your account, the name of that colour is stored on your profile and shown behind your profile page to signed-in people who visit it (on a public account); it is only a colour.</p>
 
   <div class="callout">
-    <strong>One thing worth calling out specifically:</strong> if you follow someone else's bag, your name and picture appear in that person's Followers list, and that person appears in your Following list. Any signed-in Baggle user can open those lists, even if your own account is set to private. Your private setting still hides your bags (they stay invisible to anyone you haven't shared them with); it doesn't hide who you follow or who follows you. Likes are different: if you like someone's bag, only the owner of that bag can see your name attached to the like.
+    <strong>One thing worth calling out specifically:</strong> if you follow or like someone else's bag, the owner of that bag can see your name attached to that follow or like — even if your own account is set to private. Your private setting still hides everything else about you (your own bags stay invisible to anyone you haven't shared them with); it just doesn't hide the fact that you followed or liked a bag someone else owns, from that person specifically. Nobody other than that bag's owner gets this — to anyone else, a private account stays private.
   </div>
-
-  <p><strong>Finding people.</strong> Like most social apps, Baggle lets any signed-in user search for people by name. A search result shows the person's name, their picture if they added one, and whether the account is public or private. If an account is private, nothing else about it is shown: its bags stay hidden. If you would rather not appear in search, you can leave out your name in "Edit profile," but your name is how friends find you.</p>
-
-  <p><strong>Picked for you.</strong> When you are signed in, the For You page can suggest items from public bags that you might like. These suggestions use only what you do inside Baggle: the items in your own bags, the bags you follow and like, and any interests you choose to tick. They do not use anything from other apps, other websites, or your wider browsing, and we don't buy or receive that kind of data. Your interests are stored in your own account and are not shown to other people. You can change your interests or switch personalisation off at any time from "Tune your For You" on the For You page; with it off, you simply see what is popular and new.</p>
 
   <h2>What we don't collect</h2>
   <p>The Baggle extension only reads product details from a page when you actively use it to save an item — it doesn't track, log, or send us the pages you browse otherwise. Baggle.net and the web dashboard don't run any analytics or advertising trackers today.</p>
@@ -150,7 +135,6 @@
     <li>You can make your account or any individual bag private again at any time.</li>
     <li>You can unfollow or unlike a bag at any time.</li>
     <li>You can change your display name at any time.</li>
-    <li>You can change or remove your profile picture at any time, which deletes the stored image.</li>
     <li>You can delete your account at any time from the dashboard, which deletes your bags, items, and social activity along with it.</li>
   </ul>
 
@@ -170,9 +154,8 @@
     <div class="footer-links">
       <a href="/">Home</a>
       <a href="/privacy.html">Privacy</a>
-      <a href="/terms.html">Terms</a>
     </div>
-    <div class="footer-copy">&copy; 2026 Baggle. All rights reserved. &middot; baggle.net</div>
+    <div class="footer-copy">&copy; 2026 Baggle &middot; baggle.net</div>
   </div>
 </footer>
 
