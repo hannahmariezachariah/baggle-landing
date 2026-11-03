@@ -35,7 +35,8 @@ button{font-family:inherit;}
   background:var(--cream);
 }
 .brand{display:flex;align-items:center;gap:10px;}
-.brand-bag{width:26px;height:24px;flex:0 0 auto;}
+.brand-bag{height:32px;width:auto;flex:0 0 auto;display:block;}
+.wordmark-img{height:28px;width:auto;display:block;}
 .wordmark{
   font-family:Georgia,"Times New Roman",serif;
   font-size:1.65rem;font-weight:700;letter-spacing:0.01em;color:var(--black);
@@ -111,4 +112,6 @@ button{font-family:inherit;}
 @media (max-width:560px){
   .site-header{padding:14px 18px;}
   .wordmark{font-size:1.45rem;}
+  .brand-bag{height:28px;}
+  .wordmark-img{height:24px;}
 }
