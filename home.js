@@ -104,3 +104,30 @@
       btn.disabled = false; btn.textContent = label;
     }
   });
+
+
+  // ---- app waitlist ----
+  // Adds the email to the waitlist table (anyone can add; nobody can read it
+  // from the website). An email that's already on the list counts as success.
+  const waitForm = $("waitForm");
+  if (waitForm) {
+    waitForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const status = $("waitStatus");
+      const email = $("waitEmail").value.trim();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || email.length > 254) {
+        setStatus(status, "Please enter a valid email address.", true);
+        return;
+      }
+      $("waitBtn").disabled = true;
+      setStatus(status, "");
+      const { error } = await baggleSupabase.from("waitlist").insert({ email, source: "website" });
+      $("waitBtn").disabled = false;
+      if (error && error.code !== "23505") {
+        setStatus(status, "Sorry, that didn't work. Please try again.", true);
+        return;
+      }
+      $("waitEmail").value = "";
+      setStatus(status, "You're on the list. We'll email you when the app is out.");
+    });
+  }

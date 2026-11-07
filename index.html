@@ -84,12 +84,29 @@
   .swap-line button:hover{text-decoration:underline;}
   [hidden]{display:none !important;}
 
+  /* ---------- app waitlist ---------- */
+  .app-wait{margin-top:34px;padding:20px 22px;border-radius:18px;background:var(--pink-soft);border:1px solid #F6D3E0;max-width:560px;}
+  .app-wait-tag{display:inline-block;margin:0 0 8px;padding:3px 10px;border-radius:999px;background:var(--purple);color:var(--white);font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;}
+  .app-wait h2{font-size:1.08rem;font-weight:700;color:var(--purple);margin:0 0 4px;}
+  .app-wait-sub{font-size:0.9rem;color:var(--stone);margin:0 0 14px;line-height:1.5;}
+  .app-wait form{display:flex;gap:10px;}
+  .app-wait input{flex:1;min-width:0;padding:13px 16px;border:1.5px solid var(--line);border-radius:12px;font-family:inherit;font-size:0.95rem;color:var(--purple);background:var(--white);outline:none;}
+  .app-wait input:focus{border-color:var(--purple);}
+  .app-wait .btn{width:auto;white-space:nowrap;margin:0;}
+  .wait-status{min-height:1.2em;margin:8px 0 0;font-size:0.86rem;color:var(--purple);font-weight:600;}
+  .wait-status.error{color:#C14343;}
+  .wait-legal{font-size:0.76rem;color:var(--stone);margin:2px 0 0;}
+  .wait-legal a{color:var(--stone);text-decoration:underline;}
+  .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
+
   @media (max-width:900px){
     .home{grid-template-columns:1fr;gap:40px;padding:28px 20px 12px;}
     .card{order:-1;}
     .home h1{margin-bottom:26px;}
   }
   @media (max-width:520px){
+    .app-wait form{flex-direction:column;}
+    .app-wait .btn{width:100%;}
     .steps{grid-template-columns:1fr;gap:22px;}
     .card{padding:26px 20px 22px;}
   }
@@ -119,6 +136,19 @@
       <li class="step"><div class="step-num">03</div><h3>Start shopping</h3><p>Browse any online store, just like you normally would.</p></li>
       <li class="step"><div class="step-num">04</div><h3>Bag it</h3><p>Save any item you like to your dedicated bag, and revisit whenever you're ready.</p></li>
     </ol>
+
+    <div class="app-wait">
+      <p class="app-wait-tag">Coming soon</p>
+      <h2>The Baggle app for iPhone and Android</h2>
+      <p class="app-wait-sub">Leave your email and we'll tell you the day it's out.</p>
+      <form id="waitForm" novalidate>
+        <label class="visually-hidden" for="waitEmail">Email address</label>
+        <input type="email" id="waitEmail" placeholder="Email address" autocomplete="email" required>
+        <button type="submit" class="btn btn-solid" id="waitBtn">Get the app first</button>
+      </form>
+      <p class="wait-status" id="waitStatus" role="status"></p>
+      <p class="wait-legal">We'll only email you about the app launch. <a href="/privacy.html#waitlist">How we use your email</a></p>
+    </div>
   </section>
 
   <section class="card" aria-live="polite">
