@@ -89,7 +89,8 @@
   }
 
   function size() {
-    var w = Math.round(stage.clientWidth * dpr), h = Math.round(stage.clientHeight * dpr);
+    // The canvas's own box (on upright phones it only fills the top of the screen).
+    var w = Math.round(canvas.clientWidth * dpr), h = Math.round(canvas.clientHeight * dpr);
     if (canvas.width !== w || canvas.height !== h) {
       canvas.width = w; canvas.height = h;
       ctx.imageSmoothingQuality = "high";

@@ -128,6 +128,33 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap}
   .phone-below{display:flex;justify-content:center;padding:56px 24px 64px;background:var(--plum)}
   .phone-below .phone{width:min(260px,72vw);max-height:none}
 }
+/* phones held upright (17 Nov): the film sits in the top part of the screen,
+   cropped much less, and the sign-up lives in the plum space underneath,
+   so the bag stays sharp and in view instead of being blurred behind the form */
+@media (max-width:820px) and (orientation:portrait){
+  :root{--filmh:58%}
+  .stage{background:var(--plum-deep) url("film/poster.webp") center top/auto var(--filmh) no-repeat}
+  .scrub .stage{background:linear-gradient(180deg,#2A0740 0%,#3C0C5A 100%)}
+  #film{height:var(--filmh);bottom:auto;filter:none}
+  .stage::after{content:"";position:absolute;left:0;right:0;top:calc(var(--filmh) - 90px);height:92px;pointer-events:none;
+    background:linear-gradient(180deg,rgba(42,7,64,0) 0%,rgba(42,7,64,.75) 60%,#2E0846 100%)}
+  .scrub .stage::after{background:linear-gradient(180deg,rgba(42,7,64,0) 0%,rgba(42,7,64,.75) 60%,#2F0848 100%)}
+  .shade{display:none}
+  .cue{bottom:max(26px,env(safe-area-inset-bottom));z-index:2}
+  /* the heading is there from the start so the plum space is never empty;
+     the email box and button arrive with the last frame */
+  .final>*{opacity:1;transform:none}
+  .final .left>*:not(h1){opacity:var(--reveal);transform:translateY(calc((1 - var(--reveal)) * 18px))}
+  .final{top:calc(var(--filmh) - 34px);bottom:0;height:auto;padding:0 22px max(18px,env(safe-area-inset-bottom));align-content:center;z-index:2}
+  .final .left{max-width:420px;width:100%}
+  h1{font-size:clamp(28px,8.4vw,36px);margin-bottom:0}
+  .wait{margin-top:16px;gap:9px}
+  .wait input,.btn{padding-top:13px;padding-bottom:13px}
+  .status{margin-top:8px;min-height:1.2em}
+  .note{font-size:12.5px}
+  .phone-below{padding:44px 24px 52px}
+  .phone-below .phone{width:min(230px,62vw)}
+}
 @media (max-width:480px){
   .wait .btn{width:100%}
 }
