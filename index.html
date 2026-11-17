@@ -1,208 +1,201 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en-GB">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://wndqubtncxtbninmojpx.supabase.co wss://wndqubtncxtbninmojpx.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
-<meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Baggle, Save what you love, wherever you shop</title>
-<meta name="description" content="Baggle lets you save items from any online store in one place, with price-drop and back-in-stock alerts.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Baggle · Coming soon</title>
+<meta name="description" content="Something new for online shopping is nearly here. Leave your email to get early access to Baggle.">
+<meta name="theme-color" content="#3C0C5A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" sizes="32x32" href="/brand/favicon-32.png">
 <link rel="icon" type="image/png" sizes="48x48" href="/brand/favicon-48.png">
 <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png">
-<link rel="stylesheet" href="/site.css">
 <style>
-  /* One screen, no scrolling on desktop: steps on the left, login card on the right. */
-  .home{
-    flex:1;
-    display:grid;
-    grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr);
-    gap:72px;
-    align-items:center;
-    width:100%;max-width:1120px;margin:0 auto;
-    padding:24px 32px;
-  }
-  .eyebrow{
-    font-size:0.76rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
-    color:var(--stone-light);margin-bottom:14px;
-  }
-  .home h1{
-    font-family:inherit;
-    font-size:clamp(2rem,3.6vw,3rem);line-height:1.15;font-weight:700;letter-spacing:-0.025em;
-    margin:0 0 38px;max-width:520px;
-  }
-  .steps{
-    list-style:none;margin:0;padding:0;
-    display:grid;grid-template-columns:1fr 1fr;gap:30px 36px;
-  }
-  .step-num{font-family:inherit;font-weight:500;font-size:1.9rem;color:var(--stone-light);margin-bottom:8px;}
-  .step h3{font-size:1.02rem;font-weight:700;margin:0 0 6px;}
-  .step p{font-size:0.9rem;line-height:1.55;color:var(--stone);margin:0;}
+:root{
+  --plum:#3C0C5A; --plum-deep:#2A0740; --pink:#FF4F8B; --pink-2:#FF86AE; --ink:#24183A; --cream:#FBF7F2;
+  --display:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --body:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --hh:0px;            /* no header: the film fills the screen */
+  --reveal:1;          /* 0 = film playing, 1 = sign-up shown (set by film.js) */
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--plum-deep);color:#fff;font-family:var(--body);font-size:16px;line-height:1.5;overflow-x:hidden}
 
-  /* ---------- login card (Instagram-style, Baggle colours) ---------- */
-  .card{
-    width:100%;max-width:400px;justify-self:center;
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:20px;
-    padding:30px 28px 26px;
-    box-shadow:0 24px 44px rgba(17,17,17,0.08);
-  }
-  .card-brand{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
-  .card-bag{height:38px;width:auto;display:block;}
-  .card-wordmark{height:30px;width:auto;display:block;}
-  .card h2{font-size:1.15rem;font-weight:700;color:var(--purple);margin:0 0 6px;}
-  .card .sub{font-size:0.86rem;line-height:1.5;color:var(--stone);margin:0 0 16px;}
-  .card form{display:flex;flex-direction:column;gap:10px;}
-  .card h2 + form{margin-top:14px;}
-  .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-  .card input{
-    width:100%;padding:14px 16px;
-    border:1.5px solid var(--line);border-radius:12px;
-    font-family:inherit;font-size:0.95rem;color:var(--purple);
-    background:var(--white);outline:none;
-    transition:border-color .15s ease;
-  }
-  .card input::placeholder{color:#A99FB5;}
-  .card input:focus{border-color:var(--purple);}
-  .card .btn{margin-top:6px;}
-  .status{min-height:1.2em;margin:8px 0 0;font-size:0.84rem;color:var(--stone);text-align:center;}
-  .status.error{color:#C14343;}
-  .card-link{
-    display:block;margin:12px auto 0;background:none;border:0;cursor:pointer;
-    font-size:0.88rem;font-weight:600;color:var(--purple);text-align:center;
-  }
-  .card-link:hover{text-decoration:underline;}
-  .legal-line{font-size:0.76rem;color:var(--stone-light);text-align:center;margin:16px 0 0;line-height:1.55;}
-  .legal-line a{color:var(--stone);text-decoration:underline;}
-  .divider{height:1px;background:var(--line);margin:20px 0;}
-  .swap-line{text-align:center;font-size:0.88rem;color:var(--stone);margin:16px 0 0;}
-  .swap-line button{background:none;border:0;padding:0;cursor:pointer;font-size:inherit;font-weight:700;color:var(--purple);}
-  .swap-line button:hover{text-decoration:underline;}
-  [hidden]{display:none !important;}
+/* the film: by default (no JS / reduced motion) it's a still of the last frame
+   with everything shown. film.js adds .scrub to <html> to turn on scrolling. */
+.scrolly{position:relative}
+.stage{position:relative;min-height:calc(100vh - var(--hh));min-height:calc(100svh - var(--hh));overflow:hidden;
+  background:#1d0a2a url("film/poster.webp") center/cover no-repeat}
+.scrub .scrolly{height:560vh}
+.scrub .stage{position:sticky;top:var(--hh);height:calc(100vh - var(--hh));height:calc(100svh - var(--hh));min-height:0;background-image:none}
+#film{position:absolute;inset:0;width:100%;height:100%;display:block}
+.shade{position:absolute;inset:0;pointer-events:none;opacity:var(--reveal);
+  background:
+    linear-gradient(90deg,rgba(42,7,64,.92) 0%,rgba(42,7,64,.72) 24%,rgba(42,7,64,0) 40%,rgba(42,7,64,0) 60%,rgba(42,7,64,.72) 76%,rgba(42,7,64,.92) 100%),
+    linear-gradient(180deg,rgba(42,7,64,.18),rgba(42,7,64,.18))}
 
-  /* ---------- app waitlist ---------- */
-  .app-wait{margin-top:34px;padding:20px 22px;border-radius:18px;background:var(--pink-soft);border:1px solid #F6D3E0;max-width:560px;}
-  .app-wait-tag{display:inline-block;margin:0 0 8px;padding:3px 10px;border-radius:999px;background:var(--purple);color:var(--white);font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;}
-  .app-wait h2{font-size:1.08rem;font-weight:700;color:var(--purple);margin:0 0 4px;}
-  .app-wait-sub{font-size:0.9rem;color:var(--stone);margin:0 0 14px;line-height:1.5;}
-  .app-wait form{display:flex;gap:10px;}
-  .app-wait input{flex:1;min-width:0;padding:13px 16px;border:1.5px solid var(--line);border-radius:12px;font-family:inherit;font-size:0.95rem;color:var(--purple);background:var(--white);outline:none;}
-  .app-wait input:focus{border-color:var(--purple);}
-  .app-wait .btn{width:auto;white-space:nowrap;margin:0;}
-  .wait-status{min-height:1.2em;margin:8px 0 0;font-size:0.86rem;color:var(--purple);font-weight:600;}
-  .wait-status.error{color:#C14343;}
-  .wait-legal{font-size:0.76rem;color:var(--stone);margin:2px 0 0;}
-  .wait-legal a{color:var(--stone);text-decoration:underline;}
-  .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
+.cue{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);display:none;flex-direction:column;align-items:center;gap:8px;
+  font-weight:700;font-size:15px;letter-spacing:.02em;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.55);pointer-events:none}
+.scrub .cue{display:flex}
+.cue i{width:26px;height:40px;border:2px solid rgba(255,255,255,.85);border-radius:14px;position:relative}
+.cue i::after{content:"";position:absolute;left:50%;top:7px;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:#fff;animation:wheel 1.6s ease-in-out infinite}
+@keyframes wheel{0%{opacity:0;transform:translateY(-2px)}30%{opacity:1}100%{opacity:0;transform:translateY(12px)}}
 
-  @media (max-width:900px){
-    .home{grid-template-columns:1fr;gap:40px;padding:28px 20px 12px;}
-    .card{order:-1;}
-    .home h1{margin-bottom:26px;}
-  }
-  @media (max-width:520px){
-    .app-wait form{flex-direction:column;}
-    .app-wait .btn{width:100%;}
-    .steps{grid-template-columns:1fr;gap:22px;}
-    .card{padding:26px 20px 22px;}
-  }
+/* the sign-up and phone, laid either side of the bag */
+.final{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr) minmax(0,1fr);align-items:center;
+  max-width:1320px;margin:0 auto;padding:24px max(24px,env(safe-area-inset-left))}
+.final>*{opacity:var(--reveal);transform:translateY(calc((1 - var(--reveal)) * 26px))}
+.final .left{grid-column:1;max-width:380px}
+.final .right{grid-column:3;justify-self:end}
+.scrub .final:not(.on){pointer-events:none}
+
+h1{font-family:var(--display);font-weight:800;font-size:clamp(38px,4.2vw,62px);line-height:1.05;letter-spacing:-.02em;margin:0 0 6px;text-wrap:balance;text-shadow:0 2px 24px rgba(20,4,32,.35)}
+.wait{display:flex;gap:10px;margin-top:26px;max-width:460px;flex-wrap:wrap}
+.final .left .wait input{flex-basis:100%}
+.final .left .wait .btn{padding-left:34px;padding-right:34px}
+.wait input{flex:1 1 220px;min-width:0;border-radius:999px;border:2px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;padding:15px 22px;font-family:var(--body);font-size:16px;outline:none;transition:border-color .2s,background .2s;backdrop-filter:blur(6px)}
+.wait input::placeholder{color:#D6C6E6}
+.wait input:focus{border-color:var(--pink-2);background:rgba(255,255,255,.16)}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:999px;background:var(--pink);color:#fff;font-family:var(--body);font-weight:800;font-size:16px;padding:15px 28px;cursor:pointer;
+  box-shadow:0 12px 28px -12px rgba(255,79,139,.85);transition:transform .15s cubic-bezier(.34,1.56,.64,1),box-shadow .2s,background .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 16px 32px -12px rgba(255,79,139,.9)}
+.btn:active{transform:scale(.96)}
+.btn:disabled{opacity:.6;cursor:default;transform:none}
+.btn:focus-visible,.wait input:focus-visible,a:focus-visible{outline:3px solid var(--pink-2);outline-offset:3px}
+
+/* the Sign up "press" (haptics.js) */
+#waitBtn{position:relative;overflow:hidden;isolation:isolate;-webkit-tap-highlight-color:transparent;user-select:none}
+#waitBtn.hx-press{transform:scale(.92);box-shadow:0 6px 14px -8px rgba(255,79,139,.9);filter:brightness(1.08);transition:transform .08s ease-out,box-shadow .08s}
+#waitBtn.hx-release{animation:hx-spring .5s cubic-bezier(.28,1.6,.5,1)}
+@keyframes hx-spring{0%{transform:scale(.92)}45%{transform:scale(1.07)}70%{transform:scale(.98)}100%{transform:scale(1)}}
+.hx-ripple{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.55) 0%,rgba(255,255,255,.25) 40%,rgba(255,255,255,0) 70%);transform:scale(0);animation:hx-ripple .65s ease-out forwards;pointer-events:none;z-index:-1}
+@keyframes hx-ripple{to{transform:scale(1);opacity:0}}
+.hx-spark{position:fixed;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;pointer-events:none;z-index:50;animation:hx-spark .7s cubic-bezier(.15,.7,.3,1) forwards;box-shadow:0 0 8px rgba(255,79,139,.6)}
+.hx-spark.star{border-radius:2px;width:12px;height:12px;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%)}
+@keyframes hx-spark{0%{transform:translate(0,0) scale(.4) rotate(0);opacity:1}70%{opacity:1}100%{transform:translate(var(--dx),calc(var(--dy) + 18px)) scale(1) rotate(var(--rot));opacity:0}}
+#waitBtn.hx-done{background:#FF2F78;box-shadow:0 0 0 6px rgba(255,79,139,.25),0 16px 32px -12px rgba(255,79,139,.9);animation:hx-spring .55s cubic-bezier(.28,1.6,.5,1)}
+.hx-shake{animation:hx-shake .4s cubic-bezier(.36,.07,.19,.97)}
+@keyframes hx-shake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.status{min-height:1.4em;font-weight:700;color:var(--pink-2);margin-top:12px}
+.status.error{color:#FFC2D6}
+.status.ok::before{content:"✓ ";}
+.note{font-size:13.5px;color:#D9CBE6;margin-top:4px}
+.note a{color:#F2EAF9}
+.visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* phone */
+.phone{width:min(270px,100%);aspect-ratio:9/18.5;max-height:calc(100vh - var(--hh) - 48px);background:#120A1C;border-radius:44px;padding:11px;box-shadow:0 50px 90px -30px rgba(0,0,0,.7);position:relative}
+.screen{height:100%;border-radius:34px;overflow:hidden;background:linear-gradient(180deg,#56287F 0%,#3A1458 55%,#26093A 100%);padding:32px 12px 12px;display:flex;flex-direction:column;align-items:center}
+.clock{font-family:var(--display);font-weight:800;font-size:52px;line-height:1;letter-spacing:-.02em}
+.date{font-size:13px;color:#E7DAF2;margin-top:6px}
+.stack{width:100%;margin-top:20px;display:flex;flex-direction:column;gap:9px}
+.notif{background:rgba(255,255,255,.94);color:var(--ink);border-radius:18px;padding:10px 12px;display:flex;gap:10px;align-items:flex-start;font-size:12.5px;line-height:1.3;opacity:0;transform:translateY(-22px) scale(.94)}
+.on .notif,.no-film .notif{animation:pop 12s cubic-bezier(.2,1.2,.3,1) infinite}
+.notif:nth-child(2){animation-delay:1.6s}
+.notif:nth-child(3){animation-delay:3.2s}
+.notif .ic{width:30px;height:30px;flex:0 0 auto;border-radius:8px;background:#fff;display:grid;place-items:center;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.notif .ic img{width:22px;height:auto}
+.notif .tx{flex:1;min-width:0}
+.notif .top{display:flex;justify-content:space-between;gap:8px}
+.notif b{font-weight:800}
+.notif time{color:#7A7088;font-size:11.5px;white-space:nowrap}
+@keyframes pop{
+  0%{opacity:0;transform:translateY(-22px) scale(.94)}
+  5%{opacity:1;transform:none}
+  70%{opacity:1;transform:none}
+  76%,100%{opacity:0;transform:translateX(30%)}
+}
+.phone-below{display:none}
+
+footer{background:var(--plum-deep);padding:22px max(24px,env(safe-area-inset-left)) calc(22px + env(safe-area-inset-bottom));font-size:13px;color:#BFAAD3}
+footer .in{max-width:1320px;margin:0 auto;display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-between}
+footer a{color:#E3D5F0}
+footer nav{display:flex;gap:16px;flex-wrap:wrap}
+
+/* narrower screens: the sign-up sits over the bag, the phone follows below */
+@media (max-width:1023px){
+  .final{grid-template-columns:minmax(0,1fr);align-content:center;justify-items:center;text-align:center}
+  .final .left{grid-column:1;max-width:520px}
+  .final .right{display:none}
+  .wait{margin-left:auto;margin-right:auto;justify-content:center}
+  .shade{background:linear-gradient(180deg,rgba(42,7,64,.74),rgba(42,7,64,.9))}
+  #film{filter:blur(calc(var(--reveal) * 5px))}
+  .final .left .wait input{flex-basis:220px}
+  .phone-below{display:flex;justify-content:center;padding:56px 24px 64px;background:var(--plum)}
+  .phone-below .phone{width:min(260px,72vw);max-height:none}
+}
+@media (max-width:480px){
+  .wait .btn{width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  .on .notif,.no-film .notif,.notif{animation:none;opacity:1;transform:none}
+  .btn{transition:none}
+  .cue i::after{animation:none}
+}
 </style>
 </head>
-<body>
+<body class="no-film">
 
-<header class="site-header">
-  <a href="/" class="brand" aria-label="Baggle home">
-    <img class="brand-bag" src="/brand/logo-bag.png" alt="" width="125" height="132">
-    <img class="wordmark-img" src="/brand/wordmark.png" alt="baggle" width="382" height="120">
-  </a>
-  <nav class="site-nav">
-    <a href="/for-you.html" class="nav-btn">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-      For You
-    </a>
-  </nav>
-</header>
 
-<main class="home">
-  <section>
-    <h1>From tab to bag in four steps.</h1>
-    <ol class="steps">
-      <li class="step"><div class="step-num">01</div><h3>Download Baggle</h3><p>Add the extension to your browser in a couple of clicks.</p></li>
-      <li class="step"><div class="step-num">02</div><h3>Create an account</h3><p>Set up your Baggle account so everything's saved in one place.</p></li>
-      <li class="step"><div class="step-num">03</div><h3>Start shopping</h3><p>Browse any online store, just like you normally would.</p></li>
-      <li class="step"><div class="step-num">04</div><h3>Bag it</h3><p>Save any item you like to your dedicated bag, and revisit whenever you're ready.</p></li>
-    </ol>
+<main>
+  <section class="scrolly" id="scrolly" aria-label="Step inside Baggle">
+    <div class="stage" id="stage">
+      <canvas id="film" aria-hidden="true"></canvas>
+      <div class="shade" aria-hidden="true"></div>
+      <div class="cue" id="cue" aria-hidden="true"><i></i>Scroll to step inside</div>
 
-    <div class="app-wait">
-      <p class="app-wait-tag">Coming soon</p>
-      <h2>The Baggle app for iPhone and Android</h2>
-      <p class="app-wait-sub">Leave your email and we'll tell you the day it's out.</p>
-      <form id="waitForm" novalidate>
-        <label class="visually-hidden" for="waitEmail">Email address</label>
-        <input type="email" id="waitEmail" placeholder="Email address" autocomplete="email" required>
-        <button type="submit" class="btn btn-solid" id="waitBtn">Get the app first</button>
-      </form>
-      <p class="wait-status" id="waitStatus" role="status"></p>
-      <p class="wait-legal">We'll only email you about the app launch. <a href="/privacy.html#waitlist">How we use your email</a></p>
+      <div class="final on" id="final">
+        <section class="left" aria-labelledby="title">
+          <h1 id="title">Be the first to know.</h1>
+          <form class="wait" id="waitForm" novalidate>
+            <label class="visually-hidden" for="waitEmail">Email address</label>
+            <input id="waitEmail" type="email" placeholder="Your email address" autocomplete="email" required>
+            <button class="btn" id="waitBtn" type="submit">Sign up</button>
+          </form>
+          <div class="status" id="waitStatus" role="status" aria-live="polite"></div>
+          <div class="note">We'll only email you about the launch. <a href="/privacy.html#waitlist">How we use your email</a></div>
+        </section>
+
+        <div class="right" aria-hidden="true">
+          <div class="phone"><div class="screen">
+            <div class="clock">9:41</div><div class="date">Saturday 14 November</div>
+            <div class="stack">
+              <div class="notif"><div class="ic"><img src="/brand/logo-bag.png" alt=""></div><div class="tx"><div class="top"><b>Baggle</b><time>now</time></div>Coming soon</div></div>
+              <div class="notif"><div class="ic"><img src="/brand/logo-bag.png" alt=""></div><div class="tx"><div class="top"><b>Baggle</b><time>2m ago</time></div>Hottest app about to drop</div></div>
+              <div class="notif"><div class="ic"><img src="/brand/logo-bag.png" alt=""></div><div class="tx"><div class="top"><b>Baggle</b><time>4m ago</time></div>Be the first to know when we launch</div></div>
+            </div>
+          </div></div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="card" aria-live="polite">
-    <div class="card-brand">
-      <img class="card-bag" src="/brand/logo-bag.png" alt="" width="125" height="132">
-      <img class="card-wordmark" src="/brand/wordmark.png" alt="baggle" width="382" height="120">
-    </div>
-
-    <!-- log in -->
-    <div id="viewLogin" hidden>
-      <h2>Log into Baggle</h2>
-      <form id="loginForm" novalidate>
-        <input type="email" id="loginEmail" placeholder="Email address" autocomplete="email" required>
-        <input type="password" id="loginPassword" placeholder="Password" autocomplete="current-password" required>
-        <button type="submit" class="btn btn-solid" id="loginBtn">Log in</button>
-      </form>
-      <div class="status" id="loginStatus"></div>
-      <button type="button" class="card-link" id="forgotBtn">Forgot password?</button>
-      <div class="divider"></div>
-      <button type="button" class="btn btn-outline" id="showSignup">Create new account</button>
-      <p class="legal-line">By continuing you agree to our <a href="/terms.html" target="_blank" rel="noopener">Terms</a> and <a href="/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</p>
-    </div>
-
-    <!-- sign up -->
-    <div id="viewSignup" hidden>
-      <h2>Create your free account</h2>
-      <p class="sub">Save items from any store and get price-drop and back-in-stock alerts.</p>
-      <form id="signupForm" novalidate>
-        <div class="row2">
-          <input type="text" id="signupFirst" placeholder="First name" autocomplete="given-name" required>
-          <input type="text" id="signupLast" placeholder="Last name" autocomplete="family-name" required>
-        </div>
-        <input type="email" id="signupEmail" placeholder="Email address" autocomplete="email" required>
-        <input type="password" id="signupPassword" placeholder="Password (at least 8 characters)" autocomplete="new-password" minlength="8" required>
-        <button type="submit" class="btn btn-solid" id="signupBtn">Sign up</button>
-      </form>
-      <div class="status" id="signupStatus"></div>
-      <p class="swap-line">Already have an account? <button type="button" id="showLogin">Log in</button></p>
-      <p class="legal-line">By signing up you agree to our <a href="/terms.html" target="_blank" rel="noopener">Terms</a> and <a href="/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</p>
-    </div>
-
-    <!-- already signed in -->
-    <div id="viewSession" hidden>
-      <h2>Welcome back</h2>
-      <p class="sub" id="sessionEmail"></p>
-      <a href="/dashboard/" class="btn btn-solid">Open my bags</a>
-      <button type="button" class="card-link" id="logoutBtn">Log out</button>
-    </div>
+  <section class="phone-below on" aria-hidden="true">
+    <div class="phone"><div class="screen">
+      <div class="clock">9:41</div><div class="date">Saturday 14 November</div>
+      <div class="stack">
+        <div class="notif"><div class="ic"><img src="/brand/logo-bag.png" alt=""></div><div class="tx"><div class="top"><b>Baggle</b><time>now</time></div>Coming soon</div></div>
+        <div class="notif"><div class="ic"><img src="/brand/logo-bag.png" alt=""></div><div class="tx"><div class="top"><b>Baggle</b><time>2m ago</time></div>Hottest app about to drop</div></div>
+        <div class="notif"><div class="ic"><img src="/brand/logo-bag.png" alt=""></div><div class="tx"><div class="top"><b>Baggle</b><time>4m ago</time></div>Be the first to know when we launch</div></div>
+      </div>
+    </div></div>
   </section>
 </main>
 
-<footer class="mini-foot">&copy; 2026 Baggle. All rights reserved. &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a></footer>
+<footer>
+  <div class="in">
+    <span>&copy; 2026 Baggle</span>
+    <nav aria-label="Footer"><a href="/privacy.html">Privacy</a></nav>
+  </div>
+</footer>
 
+<script src="film.js"></script>
+<script src="haptics.js"></script>
 <script src="/dashboard/supabase.vendor.js"></script>
-<script src="/home.js"></script>
+<script src="/coming-soon.js"></script>
 </body>
 </html>
